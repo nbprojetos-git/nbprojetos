@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NB Projetos</title>
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-bVJ2YXhqbiu4UpTK9OYv6h8Nz9UgLu0s9XxJvb0O9g/3hGgQh7h0IzIbU+gT+qkzN2eF3xwqLl+sr1E+J3fvxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Topo com logo à esquerda e menu à direita -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="images/logo_topo.png" alt="NB Projetos" class="logo-topo">
+      </div>
+
+    <!-- Botão do menu hamburguer -->
+    <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Menu de navegação -->
+    <nav class="nav-menu" id="navMenu">
+      <a href="#home">home</a>
+      <a href="#a empresa">a empresa</a>
+      <a href="#projetos">projetos</a>
+      <a href="#clientes">clientes</a>
+      <a href="#contato">Contato</a>
+    </nav>
+      
+    </div>
+  </header>
+
+  <!-- Carrossel -->
+  <section id="inicio" class="carousel-container">
+    <div class="carousel-slide" id="carouselSlide">
+      <img src="images/mould.jpg" alt="Imagem 1">
+      <img src="images/mould.jpg" alt="Imagem 2">
+      <img src="images/mould.jpg" alt="Imagem 3">
+    </div>
+  </section>
+
+  <!-- faixa destaque -->
+  <section class="faixa-destaque">
+    <div class="barra-escura"></div>
+    <div class="faixa-conteudo">
+      <img src="images/logo_topo.png" alt="NB Projetos" class="logo-topo">
+      <h2>Transformando ideias em projetos</h2>
+    </div>
+  </section>
+
+  <!-- a empresa -->
+  <section id="a empresa" class="container">
+    <h2>a empresa</h2>
+    <p>Unimos criatividade e estratégia para desenvolver soluções visuais impactantes. Trabalhamos para transformar ideias em experiências visuais que conectam marcas às pessoas.</p>
+  </section>
+
+  <!-- projetos -->
+  <section id="projetos" class="container">
+    <h2>Projetos</h2>
+    <div class="projetos-grid">
+      <div class="projeto-card">
+        <img src="images/mould.jpg" alt="Produtos">
+        <div class="projeto-overlay">
+          <h3>Produtos</h3>
+          <p>Transforme suas ideias em produtos.</p>
+        </div>
+      </div>
+      <div class="projeto-card">
+        <img src="images/mould.jpg" alt="Projetos de Moldes">
+        <div class="projeto-overlay">
+          <h3>Projetos de Moldes</h3>
+          <p>Moldes injeção plástica, PU e alumínio.</p>
+        </div>
+      </div>
+      <div class="projeto-card">
+        <img src="images/mould.jpg" alt="Máquinas">
+        <div class="projeto-overlay">
+          <h3>Máquinas</h3>
+          <p>Projetos de máquinas, dispositivos e ferramentas.</p>
+        </div>
+      </div>
+      <div class="projeto-card">
+        <img src="images/mould.jpg" alt="Projetos Especiais">
+        <div class="projeto-overlay">
+          <h3>Projetos Especiais</h3>
+          <p>Projetos especiais sob demanda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- clientes -->
+  <section id="clientes" class="container">
+    <h2>Nossos Clientes</h2>
+    <div class="clientes-grid">
+      <img src="https://via.placeholder.com/150x80?text=Cliente+1" alt="Cliente 1">
+      <img src="https://via.placeholder.com/150x80?text=Cliente+2" alt="Cliente 2">
+      <img src="https://via.placeholder.com/150x80?text=Cliente+3" alt="Cliente 3">
+      <img src="https://via.placeholder.com/150x80?text=Cliente+4" alt="Cliente 4">
+    </div>
+  </section>
+
+  <!-- rodapé -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <h4>Serviços</h4>
+        <a href="#produtos">Projetos de Produtos</a>
+        <a href="#moldes">Projetos de Moldes</a>
+        <a href="#maquinas">Projetos de Máquinas</a>
+        <a href="#especiais">Projetos Especiais</a>
+      </div>
+
+      <div class="footer-contact">
+        <p><strong>NB Projetos</strong></p>
+        <p><i class="fas fa-map-marker-alt"></i> Rua Alfredo Raimundo, 100<br> Romeu Santini - São Carlos-SP</p>
+        <p><i class="fas fa-phone-alt"></i> 16 99156-2791</p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:paulob.nbprojetos@gmail.com">paulob.nbprojetos@gmail.com</a></p>
+        <p><i class="fas fa-globe"></i> <a href="https://nbprojetos.com/contato" target="_blank">nbprojetos.com/contato</a></p>
+      </div>
+
+      <div class="footer-logo">
+        <img src="images/logo_topo.png" alt="Logo NB Projetos">
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 NB Projetos. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- JS do Carrossel -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slide = document.querySelector('.carousel-slide');
+      const slides = document.querySelectorAll('.carousel-slide img');
+      let index = 0;
+      const total = slides.length;
+
+      setInterval(() => {
+        index = (index + 1) % total;
+        slide.style.transform = `translateX(-${index * 100}%)`;
+      }, 5000);
+    });
+
+    // JS do menu hambúrguer
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('navMenu').classList.toggle('show');
+    });
+  </script>
+
+</body>
+</html>
