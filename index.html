@@ -10,148 +10,215 @@
 </head>
 <body>
 
-  <!-- Topo com logo à esquerda e menu à direita -->
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <img src="images/logo_topo.png" alt="NB Projetos" class="logo-topo">
-      </div>
-
-    <!-- Botão do menu hamburguer -->
-    <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu">
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Menu de navegação -->
-    <nav class="nav-menu" id="navMenu">
-      <a href="#home">home</a>
-      <a href="#a empresa">a empresa</a>
-      <a href="#projetos">projetos</a>
-      <a href="#clientes">clientes</a>
-      <a href="#contato">Contato</a>
-    </nav>
-      
-    </div>
-  </header>
-
-  <!-- Carrossel -->
-  <section id="inicio" class="carousel-container">
-    <div class="carousel-slide" id="carouselSlide">
-      <img src="images/mould.jpg" alt="Imagem 1">
-      <img src="images/mould.jpg" alt="Imagem 2">
-      <img src="images/mould.jpg" alt="Imagem 3">
-    </div>
-  </section>
-
-  <!-- faixa destaque -->
-  <section class="faixa-destaque">
-    <div class="barra-escura"></div>
-    <div class="faixa-conteudo">
+<header>
+  <div class="header-container">
+    <div class="logo">
       <img src="images/logo_topo.png" alt="NB Projetos" class="logo-topo">
-      <h2>Transformando ideias em projetos</h2>
-    </div>
-  </section>
-
-  <!-- a empresa -->
-  <section id="a empresa" class="container">
-    <h2>a empresa</h2>
-    <p>Unimos criatividade e estratégia para desenvolver soluções visuais impactantes. Trabalhamos para transformar ideias em experiências visuais que conectam marcas às pessoas.</p>
-  </section>
-
-  <!-- projetos -->
-  <section id="projetos" class="container">
-    <h2>Projetos</h2>
-    <div class="projetos-grid">
-      <div class="projeto-card">
-        <img src="images/mould.jpg" alt="Produtos">
-        <div class="projeto-overlay">
-          <h3>Produtos</h3>
-          <p>Transforme suas ideias em produtos.</p>
-        </div>
-      </div>
-      <div class="projeto-card">
-        <img src="images/mould.jpg" alt="Projetos de Moldes">
-        <div class="projeto-overlay">
-          <h3>Projetos de Moldes</h3>
-          <p>Moldes injeção plástica, PU e alumínio.</p>
-        </div>
-      </div>
-      <div class="projeto-card">
-        <img src="images/mould.jpg" alt="Máquinas">
-        <div class="projeto-overlay">
-          <h3>Máquinas</h3>
-          <p>Projetos de máquinas, dispositivos e ferramentas.</p>
-        </div>
-      </div>
-      <div class="projeto-card">
-        <img src="images/mould.jpg" alt="Projetos Especiais">
-        <div class="projeto-overlay">
-          <h3>Projetos Especiais</h3>
-          <p>Projetos especiais sob demanda.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- clientes -->
-  <section id="clientes" class="container">
-    <h2>Nossos Clientes</h2>
-    <div class="clientes-grid">
-      <img src="https://via.placeholder.com/150x80?text=Cliente+1" alt="Cliente 1">
-      <img src="https://via.placeholder.com/150x80?text=Cliente+2" alt="Cliente 2">
-      <img src="https://via.placeholder.com/150x80?text=Cliente+3" alt="Cliente 3">
-      <img src="https://via.placeholder.com/150x80?text=Cliente+4" alt="Cliente 4">
-    </div>
-  </section>
-
-  <!-- rodapé -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-links">
-        <h4>Serviços</h4>
-        <a href="#produtos">Projetos de Produtos</a>
-        <a href="#moldes">Projetos de Moldes</a>
-        <a href="#maquinas">Projetos de Máquinas</a>
-        <a href="#especiais">Projetos Especiais</a>
-      </div>
-
-      <div class="footer-contact">
-        <p><strong>NB Projetos</strong></p>
-        <p><i class="fas fa-map-marker-alt"></i> Rua Alfredo Raimundo, 100<br> Romeu Santini - São Carlos-SP</p>
-        <p><i class="fas fa-phone-alt"></i> 16 99156-2791</p>
-        <p><i class="fas fa-envelope"></i> <a href="mailto:paulob.nbprojetos@gmail.com">paulob.nbprojetos@gmail.com</a></p>
-        <p><i class="fas fa-globe"></i> <a href="https://nbprojetos.com/contato" target="_blank">nbprojetos.com/contato</a></p>
-      </div>
-
-      <div class="footer-logo">
-        <img src="images/logo_topo.png" alt="Logo NB Projetos">
-      </div>
     </div>
 
-    <div class="footer-bottom">
-      <p>&copy; 2025 NB Projetos. Todos os direitos reservados.</p>
+    <div class="menu-area">
+      <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html">home</a>
+        <a href="index.html#a-empresa">a empresa</a>
+        <a href="index.html#projetos">projetos</a>
+        <a href="index.html#clientes">clientes</a>
+        <a href="contato.html">contato</a>
+      </nav>
     </div>
-  </footer>
+  </div>
+</header>
 
-  <!-- JS do Carrossel -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const slide = document.querySelector('.carousel-slide');
-      const slides = document.querySelectorAll('.carousel-slide img');
-      let index = 0;
-      const total = slides.length;
+<!-- Carrossel -->
+<section class="carousel-container">
+  <div class="carousel-slide" id="carouselSlide">
+    <img src="carrosel/img01.png" alt="Imagem 1" />
+    <img src="carrosel/img02.png" alt="Imagem 2" />
+    <img src="carrosel/img03.png" alt="Imagem 3" />
+    <img src="carrosel/img04.png" alt="Imagem 4" />
+    <img src="carrosel/img05.png" alt="Imagem 5" />
+    <img src="carrosel/img06.png" alt="Imagem 6" />
 
-      setInterval(() => {
-        index = (index + 1) % total;
-        slide.style.transform = `translateX(-${index * 100}%)`;
-      }, 5000);
-    });
+  </div>
+</section>
 
-    // JS do menu hambúrguer
-    document.getElementById('menuToggle').addEventListener('click', () => {
-      document.getElementById('navMenu').classList.toggle('show');
-    });
-  </script>
+<!-- faixa destaque -->
+<section class="faixa-destaque">
+  <div class="barra-escura"></div>
+  <div class="faixa-conteudo">
+    <img src="images/logo_preto.png" alt="NB Projetos" class="logo-topo" style="filter: invert(1) brightness(2);">
+    <h2>Transforme ideias em projetos</h2>
+  </div>
+</section>
+
+<!-- a empresa -->
+<section id="a-empresa" class="container apresentacao-nb">
+  <h2>A Empresa</h2>
+  <p>Desde 2006, a <strong>NB Projetos</strong> desenvolve soluções em engenharia com foco na <strong>agilidade, eficiência</strong> e <strong>competitividade</strong> dos nossos clientes.</p>
+  <p>Somos especializados no <strong>desenvolvimento de projetos de produtos</strong>, <strong>moldes plásticos</strong>, <strong>máquinas</strong>, <strong>dispositivos</strong> e <strong>projetos especiais</strong>. Atuamos em diversos segmentos da indústria, com destaque para as áreas <strong>médica</strong>, <strong>automotiva</strong> e de <strong>utensílios</strong>.</p>
+  <p>Nosso diferencial está em entregar <strong>soluções rápidas, técnicas e viáveis</strong>, sempre dentro do orçamento e com prazos otimizados, garantindo aos nossos parceiros <strong>ganhos em tempo e custo</strong>, sem abrir mão da qualidade.</p>
+  <h3>Nossas Especialidades</h3>
+  <ul>
+    <li><strong>Produtos:</strong> Projetos completos para linhas médica, automotiva e utensílios.</li>
+    <li><strong>Moldes Plásticos:</strong> Moldes funcionais, duráveis e otimizados para produção.</li>
+    <li><strong>Máquinas e Dispositivos:</strong> Equipamentos industriais sob medida.</li>
+    <li><strong>Projetos Especiais:</strong> Soluções personalizadas conforme a necessidade de cada cliente.</li>
+  </ul>
+  <p>Seja qual for o desafio, nossa missão é <strong>transformar ideias em projetos reais</strong>, que geram valor, inovação e crescimento.</p>
+  <p><em>NB Projetos – Engenharia que transforma ideias em projetos.</em></p>
+</section>
+
+<!-- projetos -->
+<section id="projetos" class="container">
+  <h2>Projetos</h2>
+  <div class="projetos-grid">
+    <div class="projeto-card">
+      <img src="images/projetos/molde.png" alt="Projetos de Moldes">
+      <div class="projeto-overlay">
+        <h3>Moldes</h3>
+        <p>Moldes injeção.</p>
+      </div>
+    </div>
+    <div class="projeto-card">
+      <img src="images/projetos/robo.png" alt="Projetos Especiais">
+      <div class="projeto-overlay">
+        <h3>Projetos Especiais</h3>
+        <p>Projetos sob demanda.</p>
+      </div>
+    </div>
+    <div class="projeto-card">
+      <img src="images/projetos/vending.png" alt="Máquinas">
+      <div class="projeto-overlay">
+        <h3>Máquinas especiais</h3>
+        <p>Projetos sob demanda.</p>
+      </div>
+    </div>
+    <div class="projeto-card">
+      <img src="images/projetos/maquinas.png" alt="Projetos Especiais">
+      <div class="projeto-overlay">
+        <h3>Máquinas</h3>
+        <p>Linhas e dispositivos.</p>
+      </div>
+    </div>
+    <div class="projeto-card">
+      <img src="images/projetos/produto_tunel_do_carpo.png" alt="Produtos">
+      <div class="projeto-overlay">
+        <h3>Médica</h3>
+        <p>Área da saúde.</p>
+      </div>
+    </div>
+    <div class="projeto-card">
+      <img src="images/projetos/auto_clave.png" alt="Produtos">
+      <div class="projeto-overlay">
+        <h3>Biosegurança</h3>
+        <p>Área da saúde.</p>
+      </div>
+    </div>
+    <div class="projeto-card">
+      <img src="images/projetos/produto_estojo.png" alt="Projetos Especiais">
+      <div class="projeto-overlay">
+        <h3>Produtos especiais</h3>
+        <p>Área da saúde.</p>
+      </div>
+    </div>
+    <div class="projeto-card">
+      <img src="images/projetos/produto_laboratorio.png" alt="Projetos Especiais">
+      <div class="projeto-overlay">
+        <h3>Laboratorio</h3>
+        <p>Área da saúde.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- clientes -->
+<section id="clientes" class="container">
+  <h2>Clientes</h2>
+  <div class="clientes-grid">
+    <img src="images/clientes/ds_soluction.png" alt="Cliente 1">
+    <img src="images/clientes/electrolux.png" alt="Cliente 2">
+    <img src="images/clientes/faber_castell.png" alt="Cliente 3">
+    <img src="images/clientes/hedi_plast.png" alt="Cliente 4">
+    <img src="images/clientes/latina.png" alt="Cliente 5">
+    <img src="images/clientes/lupo.png" alt="Cliente 6">
+    <img src="images/clientes/metal_forte.png" alt="Cliente 7">
+    <img src="images/clientes/pupin_plast.png" alt="Cliente 8">
+    <img src="images/clientes/randon.png" alt="Cliente 9">
+    <img src="images/clientes/smart_mach.png" alt="Cliente 10">
+    <img src="images/clientes/tecumseh.png" alt="Cliente 11">
+  </div>
+  <div class="clientes-nota">
+    <p><strong>Nota:</strong> Alguns projetos foram desenvolvidos por meio de empresas contratantes para atender clientes finais. Nestes casos, tanto a contratante quanto o cliente final são considerados atendidos pela NB Projetos.</p>
+  </div>
+</section>
+
+<!-- rodapé -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-links">
+      <h4>Serviços</h4>
+      <a href="#produtos">Projetos de Produtos</a>
+      <a href="#moldes">Projetos de Moldes</a>
+      <a href="#maquinas">Projetos de Máquinas</a>
+      <a href="#especiais">Projetos Especiais</a>
+    </div>
+
+    <div class="footer-contact">
+      <h4>NB Projetos</h4>
+      <p><img src="images/localizacao.png" alt="Endereço" style="height: 16px; vertical-align: middle; margin-right: 8px;">&nbsp;&nbsp;&nbsp;Rua Alfredo Raimundo, 100</p>
+      <p style="margin-left: 24px;">&nbsp;&nbsp;&nbsp;Romeu Santini - São Carlos-SP</p>
+      <p><img src="images/fone.png" alt="Telefone" style="height: 16px; vertical-align: middle; margin-right: 8px;">(16) 99156-2791</p>
+      <p><img src="images/email.png" alt="Email" style="height: 16px; vertical-align: middle; margin-right: 8px;"><a href="mailto:paulob.nbprojetos@gmail.com">paulob.nbprojetos@gmail.com</a></p>
+      <p><img src="images/contato.png" alt="Contato" style="height: 16px; vertical-align: middle; margin-right: 8px;"><a href="contato.html" target="_blank">&nbsp;&nbsp;nbprojetos.com/contato</a></p>
+    </div>
+
+    <div class="footer-logo" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <img src="images/logo_preto.png" alt="NB Projetos" class="logo-topo" style="filter: invert(1) brightness(2);">
+      <div class="footer-hashtags" style="margin-top: 8px; font-size: 0.9rem; color: #fff; max-width: 300px;">
+        <span style="display: inline-block; margin: 2px;">#NBProjetos</span>
+        <span style="display: inline-block; margin: 2px;">#Engenharia</span>
+        <span style="display: inline-block; margin: 2px;">#SãoCarlos</span>
+        <span style="display: inline-block; margin: 2px;">#ProjetosIndustriais</span><br>
+        <span style="display: inline-block; margin: 2px;">#ProjetosMaquinas</span>
+        <span style="display: inline-block; margin: 2px;">#ProjetosProdutosMédicos</span>
+        <span style="display: inline-block; margin: 2px;">#Projetos3D</span>
+        <span style="display: inline-block; margin: 2px;">#ProjetosMoldesPlasticos</span><br>
+        <span style="display: inline-block; margin: 2px;">#ProjetosFerramentas</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 NB Projetos. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- JS do Carrossel -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slide = document.querySelector('.carousel-slide');
+    const slides = document.querySelectorAll('.carousel-slide img');
+    let index = 0;
+    const total = slides.length;
+
+    setInterval(() => {
+      index = (index + 1) % total;
+      slide.style.transform = `translateX(-${index * 100}%)`;
+    }, 8000);
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', function () {
+        navMenu.classList.toggle('show');
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
