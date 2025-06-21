@@ -135,25 +135,22 @@ header {
 /* Carrossel */
 .carousel-container {
   width: 100vw;
-  height: 400px;
   overflow: hidden;
   position: relative;
+  display: flex;
 }
 
 .carousel-slide {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  height: 100%;
   width: max-content;
 }
 
 .carousel-slide img {
   width: 100vw;
-  height: 100%;
-  object-fit: contain;
-  flex-shrink: 0;
+  height: auto; /* <- Isso é chave: deixa a imagem controlar a altura */
   display: block;
-  padding-top: 5px;
+  object-fit: contain; /* ou cover, se quiser preencher */
 }
 
 /* Faixa destaque */
