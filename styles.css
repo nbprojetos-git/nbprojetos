@@ -425,11 +425,26 @@ h2, h3 {
 
 /* Responsividade geral */
 @media (max-width: 768px) {
-  .carousel-container {
-    max-height: 250px;
+  body {
+    padding-top: 120px;
   }
+
+  .carousel-container {
+    height: auto;
+    max-height: none;
+  }
+
+  .carousel-slide {
+    flex-direction: column;
+  }
+
   .carousel-slide img {
-    height: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+    display: block;
   }
 
   .faixa-destaque {
@@ -506,45 +521,7 @@ h2, h3 {
   border-left: 4px solid #ff6f00;
   border-radius: 4px;
 }
+
 section[id] {
   scroll-margin-top: 120px;
-}
-.apresentacao-nb,
-.container#projetos,
-.container#clientes {
-  padding: 0px 20px 40px;
-  background-color: #f9f9f9;
-  color: #2c2c2c;
-  border-radius: 8px;
-  line-height: 1.6;
-  font-size: 1rem;
-
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-@media (max-width: 768px) {
-   body {
-    padding-top: 120px; /* ou mais, caso o header seja maior */
-  }
-  .carousel-container {
-    height: auto !important;
-    margin-top: -20px; /* Ajusta o espaço para encaixar abaixo do header */
-  }
-
-  .carousel-slide img {
-    height: auto !important;
-    max-height: none !important;
-    object-fit: contain !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-}
-@media (max-width: 768px) {
-  body {
-    padding-top: 140px !important; /* aumenta o espaço para o header fixo */
-  }
-
-  .carousel-container {
-    margin-top: 0 !important;
-  }
 }
