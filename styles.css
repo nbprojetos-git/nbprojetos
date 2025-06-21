@@ -425,34 +425,11 @@ h2, h3 {
 
 /* Responsividade geral */
 @media (max-width: 768px) {
-  body {
-    padding-top: 120px !important; /* altura para header fixo */
-    margin: 0 !important;
-  }
-
   .carousel-container {
-    height: auto !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    max-height: 250px;
   }
-
-  .carousel-slide {
-    flex-direction: column;
-  }
-
   .carousel-slide img {
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block !important;
-  }
-
-  header {
-    margin: 0 !important;
-    padding: 0 !important;
+    height: 100%;
   }
 
   .faixa-destaque {
@@ -529,7 +506,19 @@ h2, h3 {
   border-left: 4px solid #ff6f00;
   border-radius: 4px;
 }
-
 section[id] {
   scroll-margin-top: 120px;
+}
+.apresentacao-nb,
+.container#projetos,
+.container#clientes {
+  padding: 0px 20px 40px;
+  background-color: #f9f9f9;
+  color: #2c2c2c;
+  border-radius: 8px;
+  line-height: 1.6;
+  font-size: 1rem;
+
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
