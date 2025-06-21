@@ -160,6 +160,27 @@
     <p>&copy; 2025 NB Projetos. Todos os direitos reservados.</p>
   </div>
 </footer>
+<!-- JS do Carrossel -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slide = document.querySelector('.carousel-slide');
+const slides = document.querySelectorAll('.carousel-slide img');
+let index = 0;
 
+setInterval(() => {
+  index = (index + 1) % slides.length;
+  slide.style.transform = `translateX(-${index * 100}vw)`;
+}, 5000);
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', function () {
+        navMenu.classList.toggle('show');
+      });
+    }
+  });
+</script>
 </body>
 </html>
