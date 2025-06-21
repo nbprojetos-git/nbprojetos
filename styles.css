@@ -522,3 +522,16 @@ section[id] {
   border: 1px solid #ccc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
+@media (max-width: 768px) {
+  .carousel-container {
+    height: auto !important;
+  }
+
+  .carousel-slide img {
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
