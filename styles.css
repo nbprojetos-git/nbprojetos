@@ -142,9 +142,9 @@ header {
 
 .carousel-slide {
   display: flex;
-  width: calc(100vw * 5); /* Número de imagens */
   transition: transform 0.5s ease-in-out;
   height: 100%;
+  width: max-content; /*  se quiser responsivo com base no conteúdo */
 }
 
 .carousel-slide img {
