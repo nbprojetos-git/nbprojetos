@@ -25,7 +25,7 @@ header {
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribui logo e menu */
+  justify-content: space-between;
   padding: 10px 20px 0;
   height: 100px;
   position: relative;
@@ -41,7 +41,7 @@ header {
   align-items: flex-end;
   height: 100%;
   margin: 0;
-  padding-bottom: 8px; /* Espaço da borda esquerda */
+  padding-bottom: 8px;
 }
 .logo img,
 .logo-topo {
@@ -135,7 +135,7 @@ header {
 /* Carrossel */
 .carousel-container {
   width: 100vw;
-  height: 400px; /* ou outro valor fixo que você desejar */
+  height: 400px;
   overflow: hidden;
   position: relative;
 }
@@ -144,16 +144,16 @@ header {
   display: flex;
   transition: transform 0.5s ease-in-out;
   height: 100%;
-  width: max-content; /*  se quiser responsivo com base no conteúdo */
+  width: max-content;
 }
 
 .carousel-slide img {
   width: 100vw;
   height: 100%;
-  object-fit: contain; /* <- Mostra a imagem inteira */
+  object-fit: contain;
   flex-shrink: 0;
   display: block;
-  padding-top: 5px; /* <- Aqui está o espaçamento do topo */
+  padding-top: 5px;
 }
 
 /* Faixa destaque */
@@ -164,9 +164,9 @@ header {
   padding: 0;
   border-top: 4px solid #cc6a00;
   height: 100px;
-  width: 100vw; /* <- Garante que ocupe a largura total da tela */
+  width: 100vw;
   position: relative;
-  overflow: hidden; /* <- Garante que nada vaze dos limites */
+  overflow: hidden;
 }
 .barra-escura {
   position: absolute;
@@ -187,10 +187,10 @@ header {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  z-index: 2; /* Fica acima da barra */
+  z-index: 2;
 }
 .faixa-conteudo .logo {
-  margin-left: 25px; /* <- Isso move o logo 10px à direita da barra */
+  margin-left: 25px;
 }
 .faixa-conteudo h2 {
   color: #fff;
@@ -358,7 +358,7 @@ h2, h3 {
   background-color: #2c2c2c;
   color: #ccc;
   padding: 40px 20px 20px;
-  width: 100vw; /* Força ocupar a tela inteira */
+  width: 100vw;
   box-sizing: border-box;
 }
 .footer-container {
@@ -507,19 +507,18 @@ h2, h3 {
   border-radius: 4px;
 }
 section[id] {
-  scroll-margin-top: 120px; /* espaço suficiente para o header fixo */
+  scroll-margin-top: 120px;
 }
 .apresentacao-nb,
 .container#projetos,
 .container#clientes {
-  padding: 0px 20px 40px; /* Topo menor */
+  padding: 0px 20px 40px;
   background-color: #f9f9f9;
   color: #2c2c2c;
   border-radius: 8px;
   line-height: 1.6;
   font-size: 1rem;
 
-  /* Adicionando borda escura */
   border: 1px solid #ccc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
