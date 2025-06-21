@@ -104,17 +104,22 @@
 </div>
 
 <div class="contato-container">
+  <form action="https://formsubmit.co/paulob.nbprojetos@gmail.com" method="POST">
+    <!-- Anti-spam (oculta o captcha do FormSubmit) -->
+    <input type="hidden" name="_captcha" value="false">
 
-  <!-- Título do formulário -->
+    <!-- Redirecionamento pós-envio -->
+    <input type="hidden" name="_next" value="index.html">
 
-    <form action="mailto:paulob.nbprojetos@gmail.com" method="post" enctype="text/plain">
-      <input type="text" name="nome" placeholder="Seu nome" required>
-      <input type="email" name="email" placeholder="Seu e-mail" required>
-      <input type="text" name="assunto" placeholder="Assunto">
-      <textarea name="mensagem" placeholder="Digite sua mensagem aqui..." required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-  </div>
+    <!-- Campos visuais -->
+    <input type="text" name="nome" placeholder="Seu nome" required>
+    <input type="email" name="email" placeholder="Seu e-mail" required>
+    <input type="text" name="assunto" placeholder="Assunto">
+    <textarea name="mensagem" placeholder="Digite sua mensagem aqui..." required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+</div>
 
 <footer class="footer">
   <div class="footer-container">
