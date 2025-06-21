@@ -110,8 +110,7 @@ header {
 .carousel-slide img {
   width: 100vw;
   height: 100%;
-  object-fit: contain;
-  flex-shrink: 0;
+  object-fit: cover;
   display: block;
 }
 
@@ -387,18 +386,15 @@ section[id] {
     padding-top: 120px;
   }
 
-  .carousel-container {
+    .carousel-container {
     height: auto;
-    margin-top: 0;
+    margin: 0;
   }
 
   .carousel-slide img {
-    width: 100vw;
     height: auto;
+    max-height: none;
     object-fit: contain;
-    padding: 0;
-    margin: 0;
-    display: block;
   }
 
   .menu-toggle {
