@@ -133,25 +133,24 @@ header {
 }
 
 /* Carrossel */
-.carousel-container {
-  width: 100vw;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-}
+  .carousel-container {
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 
-.carousel-slide {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  width: max-content;
-}
+  .carousel-slide {
+    height: auto !important;
+  }
 
-.carousel-slide img {
-  width: 100vw;
-  height: auto; /* <- Isso é chave: deixa a imagem controlar a altura */
-  display: block;
-  object-fit: contain; /* ou cover, se quiser preencher */
-}
+  .carousel-slide img {
+    width: 100vw;
+    height: auto;
+    object-fit: contain; /* mostra a imagem inteira */
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 
 /* Faixa destaque */
 .faixa-destaque {
@@ -518,19 +517,4 @@ section[id] {
 
   border: 1px solid #ccc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-@media (max-width: 768px) {
-  .carousel-slide img {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    object-fit: cover;
-  }
-
-  .carousel-container {
-    padding: 0 !important;
-    margin: 0 !important;
-    height: auto; /* se a imagem define a altura */
-  }
 }
