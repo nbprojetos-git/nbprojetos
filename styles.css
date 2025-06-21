@@ -133,24 +133,28 @@ header {
 }
 
 /* Carrossel */
-  .carousel-container {
-    height: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
+.carousel-container {
+  width: 100vw;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
 
-  .carousel-slide {
-    height: auto !important;
-  }
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+  width: max-content;
+}
 
-  .carousel-slide img {
-    width: 100vw;
-    height: auto;
-    object-fit: contain; /* mostra a imagem inteira */
-    display: block;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
+.carousel-slide img {
+  width: 100vw;
+  height: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+  padding-top: 5px;
+}
 
 /* Faixa destaque */
 .faixa-destaque {
