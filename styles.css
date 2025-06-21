@@ -134,26 +134,23 @@ header {
 
 /* Carrossel */
 .carousel-container {
-  width: 100vw;
-  height: 400px; /* ou outro valor fixo que você desejar */
+  width: 100%;
   overflow: hidden;
   position: relative;
+  max-height: none;
 }
 
 .carousel-slide {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  height: 100%;
-  width: max-content; /*  se quiser responsivo com base no conteúdo */
 }
 
 .carousel-slide img {
   width: 100vw;
-  height: 100%;
-  object-fit: contain; /* <- Mostra a imagem inteira */
+  height: auto;
   flex-shrink: 0;
   display: block;
-  padding-top: 5px; /* <- Aqui está o espaçamento do topo */
+  object-fit: cover;
 }
 
 /* Faixa destaque */
