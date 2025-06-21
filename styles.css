@@ -523,8 +523,12 @@ section[id] {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 @media (max-width: 768px) {
+   body {
+    padding-top: 120px; /* ou mais, caso o header seja maior */
+  }
   .carousel-container {
     height: auto !important;
+    margin-top: -20px; /* Ajusta o espaço para encaixar abaixo do header */
   }
 
   .carousel-slide img {
