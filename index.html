@@ -34,23 +34,22 @@
 
 <!-- Carrossel -->
 <section class="carousel-container">
-  <div class="./carousel-slide" id="carouselSlide">
-    <img src="./carrosel/img01.png" alt="Imagem 1" />
-    <img src="./carrosel/img02.png" alt="Imagem 2" />
-    <img src="./carrosel/img03.png" alt="Imagem 3" />
-    <img src="./carrosel/img04.png" alt="Imagem 4" />
-    <img src="./carrosel/img05.png" alt="Imagem 5" />
+  <div class="carousel-slide" id="carouselSlide">
+    <img src="carrosel/img01.png" alt="Imagem 1" />
+    <img src="carrosel/img02.png" alt="Imagem 2" />
+    <img src="carrosel/img03.png" alt="Imagem 3" />
+    <img src="carrosel/img04.png" alt="Imagem 4" />
+    <img src="carrosel/img05.png" alt="Imagem 5" />
   </div>
 </section>
 
-<!-- faixa destaque -->
-<section class="faixa-destaque">
+<div class="faixa-destaque">
   <div class="barra-escura"></div>
   <div class="faixa-conteudo">
-    <img src="images/logo_preto.png" alt="NB Projetos" class="logo-topo" style="filter: invert(1) brightness(2);">
-    <h2>Transforme ideias em projetos</h2>
+    <div class="logo"><img src="images/logo_preto.png" alt="NB Projetos" class="logo-topo" style="filter: invert(1) brightness(2);"></div>
+    <h2>Transformando ideias em projetos</h2>
   </div>
-</section>
+</div>
 
 <!-- a empresa -->
 <section id="a-empresa" class="container apresentacao-nb">
@@ -198,14 +197,13 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const slide = document.querySelector('.carousel-slide');
-    const slides = document.querySelectorAll('.carousel-slide img');
-    let index = 0;
-    const total = slides.length;
+const slides = document.querySelectorAll('.carousel-slide img');
+let index = 0;
 
-    setInterval(() => {
-      index = (index + 1) % total;
-      slide.style.transform = `translateX(-${index * 100}%)`;
-    }, 5000);
+setInterval(() => {
+  index = (index + 1) % slides.length;
+  slide.style.transform = `translateX(-${index * 100}vw)`;
+}, 5000);
 
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
