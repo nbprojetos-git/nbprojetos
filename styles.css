@@ -539,3 +539,12 @@ section[id] {
     margin: 0 !important;
   }
 }
+@media (max-width: 768px) {
+  body {
+    padding-top: 140px !important; /* aumenta o espaço para o header fixo */
+  }
+
+  .carousel-container {
+    margin-top: 0 !important;
+  }
+}
