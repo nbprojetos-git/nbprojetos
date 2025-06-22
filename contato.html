@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contato - NB Projetos</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Reutilizando seu CSS -->
+  <link rel="stylesheet" href="styles.css" />
   <style>
     .contato-container {
       max-width: 800px;
-      margin: 20px auto 40px;
+      margin: 100px auto;
       padding: 40px 20px;
       background-color: #f9f9f9;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .contato-container h2 {
+    h2 {
       text-align: center;
       color: #ff6f00;
       margin-bottom: 30px;
@@ -48,132 +48,28 @@
     button:hover {
       background-color: #cc6a00;
     }
-.faixa-laranja {
-  border-top: 4px solid #fff;
-  padding-top: 1px; /* Evita colapso com margem do header */
-  background-color: #ff8c1a;
-  color: #000;
-  text-align: left;
-  padding: 20px 30px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-top: 4px solid #fff;
-  margin: 0;
-  overflow: hidden; /* <- Impede colapso */
-}
-
-/* Título "Entre em Contato" */
-.titulo-contato {
-  color: #fff;
-  font-size: 2.2rem;
-  margin-top: 20px;
-}
   </style>
 </head>
 <body>
 
-<header>
-  <div class="header-container">
-    <div class="logo">
-      <img src="images/logo_topo.png" alt="NB Projetos" class="logo-topo">
-    </div>
+  <div class="contato-container">
+    <h2>Entre em Contato</h2>
+    <form action="https://formsubmit.co/paulob.nbprojetos@gmail.com" method="POST">
+      <!-- Anti-spam -->
+      <input type="hidden" name="_captcha" value="false" />
 
-    <div class="menu-area">
-      <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu">
-        <i class="fas fa-bars"></i>
-      </button>
+      <!-- Redirecionamento pós envio -->
+      <input type="hidden" name="_next" value="https://nbprojetos.com/obrigado.html" />
 
-      <nav class="nav-menu" id="navMenu">
-        <a href="index.html">home</a>
-        <a href="index.html#a-empresa">a empresa</a>
-        <a href="index.html#projetos">projetos</a>
-        <a href="index.html#clientes">clientes</a>
-        <a href="contato.html">contato</a>
-      </nav>
-    </div>
-  </div>
-</header>
+      <!-- Campos visíveis -->
+      <input type="text" name="nome" placeholder="Seu nome" required />
+      <input type="email" name="email" placeholder="Seu e-mail" required />
+      <input type="text" name="assunto" placeholder="Assunto" />
+      <textarea name="mensagem" placeholder="Digite sua mensagem aqui..." required></textarea>
 
-<!-- Faixa laranja com o texto -->
-<div class="faixa-laranja">
-  <p>
-    Nos conte sobre sua necessidade e transforme sua ideia em projeto.<br>
-    Teremos prazer em atender suas expectativas.
-  </p>
-  <h2 class="titulo-contato">Entre em Contato</h2>
-</div>
-
-<div class="contato-container">
-  <form action="https://formsubmit.co/paulob.nbprojetos@gmail.com" method="POST">
-  <input type="hidden" name="_next" value="https://nbprojetos.com/obrigado.html">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="text" name="nome" required>
-  <input type="email" name="email" required>
-  <textarea name="mensagem" required></textarea>
-  <button type="submit">Enviar</button>
-</form>
-</div>
-
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-links">
-      <h4>Serviços</h4>
-      <a href="#produtos">Projetos de Produtos</a>
-      <a href="#moldes">Projetos de Moldes</a>
-      <a href="#maquinas">Projetos de Máquinas</a>
-      <a href="#especiais">Projetos Especiais</a>
-    </div>
-
-    <div class="footer-contact">
-      <h4>NB Projetos</h4>
-      <p><img src="images/localizacao.png" alt="Endereço" style="height: 16px; vertical-align: middle; margin-right: 8px;">&nbsp;&nbsp;&nbsp;Rua Alfredo Raimundo, 100</p>
-      <p style="margin-left: 24px;">&nbsp;&nbsp;&nbsp;Romeu Santini - São Carlos-SP</p>
-      <p><img src="images/fone.png" alt="Telefone" style="height: 16px; vertical-align: middle; margin-right: 8px;">(16) 99156-2791</p>
-      <p><img src="images/email.png" alt="Email" style="height: 16px; vertical-align: middle; margin-right: 8px;"><a href="mailto:paulob.nbprojetos@gmail.com">paulob.nbprojetos@gmail.com</a></p>
-      <p><img src="images/contato.png" alt="Contato" style="height: 16px; vertical-align: middle; margin-right: 8px;"><a href="contato.html" target="_blank">&nbsp;&nbsp;nbprojetos.com/contato</a></p>
-    </div>
-
-    <div class="footer-logo" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-      <img src="images/logo_preto.png" alt="NB Projetos" class="logo-topo" style="filter: invert(1) brightness(2);">
-      <div class="footer-hashtags" style="margin-top: 8px; font-size: 0.9rem; color: #fff; max-width: 300px;">
-        <span style="display: inline-block; margin: 2px;">#NBProjetos</span>
-        <span style="display: inline-block; margin: 2px;">#Engenharia</span>
-        <span style="display: inline-block; margin: 2px;">#SãoCarlos</span>
-        <span style="display: inline-block; margin: 2px;">#ProjetosIndustriais</span><br>
-        <span style="display: inline-block; margin: 2px;">#ProjetosMaquinas</span>
-        <span style="display: inline-block; margin: 2px;">#ProjetosProdutosMédicos</span>
-        <span style="display: inline-block; margin: 2px;">#Projetos3D</span>
-        <span style="display: inline-block; margin: 2px;">#ProjetosMoldesPlasticos</span><br>
-        <span style="display: inline-block; margin: 2px;">#ProjetosFerramentas</span>
-      </div>
-    </div>
+      <button type="submit">Enviar</button>
+    </form>
   </div>
 
-  <div class="footer-bottom">
-    <p>&copy; 2025 NB Projetos. Todos os direitos reservados.</p>
-  </div>
-</footer>
-<!-- JS do Carrossel -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const slide = document.querySelector('.carousel-slide');
-const slides = document.querySelectorAll('.carousel-slide img');
-let index = 0;
-
-setInterval(() => {
-  index = (index + 1) % slides.length;
-  slide.style.transform = `translateX(-${index * 100}vw)`;
-}, 5000);
-
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-
-    if (menuToggle && navMenu) {
-      menuToggle.addEventListener('click', function () {
-        navMenu.classList.toggle('show');
-      });
-    }
-  });
-</script>
 </body>
 </html>
