@@ -252,27 +252,23 @@ header {
 }
 
 /* Projetos */
-.projetos-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-}
+@media (max-width: 768px) {
+  .projetos-grid {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
 
-.projeto-card {
-  width: calc(25% - 15px);
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  .projeto-card {
+    flex: 0 0 auto;
+    width: 280px; /* ou um valor fixo que mantenha o visual desejado */
+  }
 
-.projeto-card img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+  .projeto-card img {
+    height: 280px; /* ajuste proporcional à largura */
+    object-fit: cover;
+  }
 }
 
 .projeto-overlay {
