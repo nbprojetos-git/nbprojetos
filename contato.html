@@ -105,21 +105,13 @@
 
 <div class="contato-container">
   <form action="https://formsubmit.co/paulob.nbprojetos@gmail.com" method="POST">
-
-    <!-- Anti-spam (oculta o captcha do FormSubmit) -->
-    <input type="hidden" name="_captcha" value="false">
-
-    <!-- Redirecionamento pós-envio -->
-<input type="hidden" name="_next" value="https://nbprojetos.com/obrigado.html">
-
-    <!-- Campos visuais -->
-    <input type="text" name="nome" placeholder="Seu nome" required>
-    <input type="email" name="email" placeholder="Seu e-mail" required>
-    <input type="text" name="assunto" placeholder="Assunto">
-    <textarea name="mensagem" placeholder="Digite sua mensagem aqui..." required></textarea>
-
-    <button type="submit">Enviar</button>
-  </form>
+  <input type="hidden" name="_next" value="https://nbprojetos.com/obrigado.html">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="text" name="nome" required>
+  <input type="email" name="email" required>
+  <textarea name="mensagem" required></textarea>
+  <button type="submit">Enviar</button>
+</form>
 </div>
 
 <footer class="footer">
