@@ -37,7 +37,6 @@ header {
   gap: 25px;
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: flex-end;
@@ -45,6 +44,7 @@ header {
   margin: 0;
   padding-bottom: 8px;
 }
+
 .logo img,
 .logo-topo {
   max-height: 80px;
@@ -55,11 +55,11 @@ header {
 .logo-topo {
   transition: transform 0.3s ease;
 }
+
 .logo-topo:hover {
   transform: scale(1.02);
 }
 
-/* Botão hamburguer */
 .menu-toggle {
   display: none;
   background-color: #ff6f00;
@@ -72,11 +72,11 @@ header {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }
+
 .menu-toggle:hover {
   background-color: #cc6a00;
 }
 
-/* Menu navegação */
 .nav-menu {
   display: flex;
   flex-wrap: wrap;
@@ -85,16 +85,17 @@ header {
   max-width: 1200px;
   padding: 0;
 }
+
 .nav-menu a {
   color: #cccccc;
   text-decoration: none;
   font-weight: bold;
 }
+
 .nav-menu a:hover {
   color: #ff6f00;
 }
 
-/* Responsividade Header e Menu */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -132,125 +133,10 @@ header {
   }
 }
 
-/* Carrossel */
-.carousel-container {
-  width: 100vw;
-  height: 400px;
-  overflow: hidden;
-  position: relative;
-}
-.carousel-slide {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  height: 100%;
-  width: max-content;
-}
-.carousel-slide img {
-  width: 100vw;
-  height: 100%;
-  object-fit: contain;
-  flex-shrink: 0;
-  display: block;
-  padding-top: 5px;
-}
-
-/* Faixa destaque */
-.faixa-destaque {
-  display: flex;
-  align-items: center;
-  background-color: #ff8c1a;
-  padding: 0;
-  border-top: 4px solid #cc6a00;
-  height: 100px;
-  width: 100vw;
-  position: relative;
-  overflow: hidden;
-}
-.barra-escura {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background-color: #cc6a00;
-  width: calc((100vw - 1200px) / 2 + 15px);
-  z-index: 1;
-}
-.faixa-conteudo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex: 1;
-  padding: 0 30px;
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  z-index: 2;
-}
-.faixa-conteudo .logo {
-  margin-left: 25px;
-}
-.faixa-conteudo h2 {
-  color: #fff;
-  font-size: 1.5rem;
-  margin: 0;
-  text-align: right;
-  max-width: 1200px;
-  margin-left: auto;
-  padding-right: 0;
-  box-sizing: border-box;
-}
-
-/* Conteúdo geral */
-.container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-/* Apresentação NB Projetos */
-.apresentacao-nb,
-.container#projetos,
-.container#clientes {
-  padding: 40px 20px;
-  background-color: #f9f9f9;
-  color: #2c2c2c;
-  border-radius: 8px;
-  line-height: 1.6;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-.apresentacao-nb h2,
-.container#projetos h2,
-.container#clientes h2 {
-  color: #ff6f00;
-  margin-bottom: 20px;
-  font-size: 2rem;
-}
-.apresentacao-nb h3,
-.container#projetos h3,
-.container#clientes h3 {
-  color: #2c2c2c;
-  margin-top: 30px;
-  font-size: 1.5rem;
-}
-.apresentacao-nb ul,
-.container#projetos ul,
-.container#clientes ul {
-  padding-left: 20px;
-  margin-top: 15px;
-}
-.apresentacao-nb li,
-.container#projetos li,
-.container#clientes li {
-  margin-bottom: 10px;
-}
-
-/* === PROJETOS (DESKTOP) === */
+/* Projetos */
 .projetos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-top: 20px;
 }
@@ -258,14 +144,17 @@ header {
 .projeto-card {
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
   transition: transform 0.3s ease;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .projeto-card img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 250px;
   object-fit: cover;
+  display: block;
   transition: transform 0.4s ease;
 }
 
@@ -297,17 +186,17 @@ header {
 
 .projeto-overlay h3 {
   color: #ff6f00;
-  margin: 5px 0;
   font-size: 1.3rem;
+  margin: 5px 0;
 }
 
 .projeto-overlay p {
   font-size: 0.95rem;
   line-height: 1.3;
   padding: 0 10px;
+  color: #ff6f00;
 }
 
-/* === PROJETOS (MOBILE) === */
 @media (max-width: 768px) {
   .projetos-grid {
     display: flex;
@@ -319,124 +208,12 @@ header {
 
   .projeto-card {
     flex: 0 0 auto;
-    width: 280px;
+    width: 250px;
+    border-radius: 12px;
   }
 
   .projeto-card img {
-    height: 280px;
+    height: 250px;
     object-fit: cover;
   }
-
-  .carousel-container {
-    height: auto;
-    margin-top: 0;
-  }
-
-  .carousel-slide img {
-    height: auto;
-    width: 100vw;
-    object-fit: cover;
-    margin: 0;
-    padding: 0;
-    display: block;
-  }
-}
-
-/* Títulos */
-h2, h3 {
-  color: #ff6f00;
-}
-
-/* Footer */
-.footer {
-  background-color: #2c2c2c;
-  color: #ccc;
-  padding: 40px 20px 20px;
-  width: 100vw;
-  box-sizing: border-box;
-}
-.footer-container {
-  max-width: 1200px;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.footer-links, .footer-contact {
-  flex: 1 1 300px;
-  margin: 10px;
-}
-.footer-links h4 {
-  color: #fff;
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-}
-.footer-links a {
-  display: block;
-  color: #ccc;
-  text-decoration: none;
-  margin: 6px 0;
-}
-.footer-links a:hover {
-  color: #ff6f00;
-}
-.footer-contact a {
-  color: #ccc;
-  text-decoration: none;
-}
-.footer-contact a:hover {
-  color: #ff6f00;
-}
-.footer-contact p,
-.footer-contact a {
-  margin: 4px 0;
-  line-height: 1.2;
-  font-size: 0.95rem;
-}
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: #999;
-}
-.footer-logo {
-  flex: 1 1 150px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px;
-}
-.footer-logo img {
-  max-height: 60px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* Clientes */
-.clientes-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-.clientes-grid img {
-  height: 80px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-.clientes-nota {
-  margin-top: 20px;
-  font-size: 0.95rem;
-  color: #555;
-  background-color: #f9f9f9;
-  padding: 10px 15px;
-  border-left: 4px solid #ff6f00;
-  border-radius: 4px;
-}
-
-/* Scroll fix */
-section[id] {
-  scroll-margin-top: 120px;
 }
