@@ -30,13 +30,12 @@ header {
   height: 100px;
   position: relative;
 }
-
 .menu-area {
   display: flex;
   align-items: center;
   gap: 25px;
 }
-
+/* Logo */
 .logo {
   display: flex;
   align-items: flex-end;
@@ -44,7 +43,6 @@ header {
   margin: 0;
   padding-bottom: 8px;
 }
-
 .logo img,
 .logo-topo {
   max-height: 80px;
@@ -60,6 +58,7 @@ header {
   transform: scale(1.02);
 }
 
+/* Botão hamburguer */
 .menu-toggle {
   display: none;
   background-color: #ff6f00;
@@ -72,11 +71,11 @@ header {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }
-
 .menu-toggle:hover {
   background-color: #cc6a00;
 }
 
+/* Menu navegação */
 .nav-menu {
   display: flex;
   flex-wrap: wrap;
@@ -91,11 +90,11 @@ header {
   text-decoration: none;
   font-weight: bold;
 }
-
 .nav-menu a:hover {
   color: #ff6f00;
 }
 
+/* Responsividade Header e Menu */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -131,6 +130,84 @@ header {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* Carrossel */
+.carousel-container {
+  width: 100vw;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+  width: max-content;
+}
+
+.carousel-slide img {
+  width: 100vw;
+  height: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+  padding-top: 5px;
+}
+
+/* Faixa destaque */
+.faixa-destaque {
+  display: flex;
+  align-items: center;
+  background-color: #ff8c1a;
+  padding: 0;
+  border-top: 4px solid #cc6a00;
+  height: 100px;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+.barra-escura {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #cc6a00;
+  width: calc((100vw - 1200px) / 2 + 15px);
+  z-index: 1;
+}
+.faixa-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex: 1;
+  padding: 0 30px;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 2;
+}
+.faixa-conteudo .logo {
+  margin-left: 25px;
+}
+.faixa-conteudo h2 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0;
+  text-align: right;
+  max-width: 1200px;
+  margin-left: auto;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+
+/* Conteúdo geral */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 /* Projetos */
@@ -197,7 +274,27 @@ header {
   color: #ff6f00;
 }
 
+@media (max-width: 1024px) {
+  .projetos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  .carousel-container {
+    height: auto;
+    margin-top: 0;
+  }
+
+  .carousel-slide img {
+    height: auto;
+    width: 100vw;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
   .projetos-grid {
     display: flex;
     flex-wrap: nowrap;
