@@ -107,7 +107,14 @@ section[id] {
   margin-bottom: 20px;
   text-transform: uppercase;
 }
-
+.secao-destaque {
+  background-color: #f5f5f5; /* cinza claro */
+  border: 1px solid #ddd;    /* borda sutil */
+  border-radius: 12px;       /* cantos arredondados */
+  padding: 30px 20px;        /* espaço interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* leve sombra */
+  margin-bottom: 40px;       /* espaço entre seções */
+}
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
