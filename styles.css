@@ -454,14 +454,12 @@ body.projetos-produto-page .projeto-img-wrapper {
   height: auto; /* para garantir que o container fique com altura da imagem */
   display: block;
 }
-
 body.projetos-produto-page .projeto-img-wrapper img {
-  display: block;
   width: 100%;
-  height: auto;
-  transition: transform 0.3s ease;
+  height: 250px; /* altura fixa, pode ajustar */
+  object-fit: cover; /* mantém o enquadramento, cortando o excesso */
+  display: block;
 }
-
 body.projetos-produto-page .projeto-img-wrapper:hover img {
   transform: translateY(-20px);
 }
