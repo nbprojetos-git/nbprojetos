@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="projetos-produto-page">
 
 <header>
   <div class="header-container">
@@ -15,70 +15,66 @@
       <img src="images/logo_topo.png" alt="NB Projetos" class="logo-topo">
     </div>
     <div class="menu-area">
-      <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+      <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
       <nav class="nav-menu" id="navMenu">
         <a href="index.html">home</a>
         <a href="index.html#a-empresa">a empresa</a>
         <a href="index.html#projetos">projetos</a>
-        <a href="projetos-produto.html">produtos</a>
+        <a href="index.html#clientes">clientes</a>
         <a href="contato.html">contato</a>
       </nav>
     </div>
   </div>
 </header>
 
-<!-- Faixa Laranja de Destaque -->
-<div class="faixa-destaque">
-  <div class="barra-escura"></div>
-  <div class="faixa-conteudo">
-    <div class="logo">
-      <img src="images/logo_preto.png" alt="NB Projetos" class="logo-topo" style="filter: invert(1) brightness(2);">
-    </div>
-    <h2>Projetos de Produto</h2>
-  </div>
-</div>
-
 <section class="container secao-destaque">
   <h2>Projetos de Produto</h2>
-  <p class="texto-claro">Conheça alguns dos projetos de produto desenvolvidos pela NB Projetos. Criamos soluções inovadoras e funcionais para diferentes áreas da indústria.</p>
-</section>
 
-<section class="container">
   <div class="projetos-grid">
 
     <div class="projeto-card">
-      <img src="images/projetos/molde.png" alt="Molde Injeção">
-      <div class="projeto-overlay">
+      <div class="projeto-img-wrapper">
+        <img src="images/projetos/molde.png" alt="Molde Injeção">
+      </div>
+      <div class="projeto-info">
         <h3>Molde Injeção</h3>
-        <p>Projeto completo para molde plástico industrial, com foco em durabilidade e eficiência.</p>
+        <p>Projeto de molde para injeção plástica com foco em produção em larga escala.</p>
       </div>
     </div>
 
     <div class="projeto-card">
-      <img src="images/projetos/robo.png" alt="Robô Especial">
-      <div class="projeto-overlay">
-        <h3>Robô Especial</h3>
-        <p>Solução automatizada para linha de montagem e processos repetitivos.</p>
+      <div class="projeto-img-wrapper">
+        <img src="images/projetos/produto_tunel_do_carpo.png" alt="Túnel do Carpo">
+      </div>
+      <div class="projeto-info">
+        <h3>Ortese Médica</h3>
+        <p>Dispositivo anatômico desenvolvido para imobilização confortável.</p>
       </div>
     </div>
 
     <div class="projeto-card">
-      <img src="images/projetos/vending.png" alt="Máquina Vending">
-      <div class="projeto-overlay">
-        <h3>Máquina Vending</h3>
-        <p>Desenvolvimento de produto com integração eletromecânica para autoatendimento.</p>
+      <div class="projeto-img-wrapper">
+        <img src="images/projetos/auto_clave.png" alt="Autoclave">
+      </div>
+      <div class="projeto-info">
+        <h3>Autoclave</h3>
+        <p>Design funcional para esterilização de materiais em clínicas e laboratórios.</p>
       </div>
     </div>
 
     <div class="projeto-card">
-      <img src="images/projetos/produto_estojo.png" alt="Estojo Médico">
-      <div class="projeto-overlay">
-        <h3>Estojo Médico</h3>
-        <p>Produto funcional e ergonômico para armazenamento seguro de instrumentais.</p>
+      <div class="projeto-img-wrapper">
+        <img src="images/projetos/produto_estojo.png" alt="Estojo">
+      </div>
+      <div class="projeto-info">
+        <h3>Estojo Técnico</h3>
+        <p>Componente plástico com encaixes de precisão para instrumentos cirúrgicos.</p>
       </div>
     </div>
 
-    <!-- Adicione mais projetos conforme necessário -->
+    <!-- Adicione mais cards conforme necessário -->
 
   </div>
 </section>
