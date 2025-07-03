@@ -446,11 +446,12 @@ section[id] {
   width: auto;
   object-fit: contain;
 }
-/* CSS exclusivo para a página projetos-produto */
 
+/* CSS exclusivo para a página projetos-produto */
 body.projetos-produto-page .projeto-card {
   position: relative;
   overflow: hidden;
+  border-radius: 12px; /* importante para arredondar o card todo */
 }
 
 body.projetos-produto-page .projeto-card .projeto-img-wrapper {
@@ -472,6 +473,7 @@ body.projetos-produto-page .projeto-card:hover .projeto-img-wrapper img {
   transform: translateY(-10px); /* imagem sobe no hover */
 }
 
+/* Corrigido: hover-bar já começa com bordas arredondadas e ocupa toda a largura */
 body.projetos-produto-page .projeto-card .hover-bar {
   position: absolute;
   bottom: 0;
@@ -491,6 +493,7 @@ body.projetos-produto-page .projeto-card .hover-bar {
   pointer-events: none;
   transition: opacity 0.3s ease;
   user-select: none;
+  box-sizing: border-box; /* garante o cálculo correto da largura */
 }
 
 body.projetos-produto-page .projeto-card:hover .hover-bar {
