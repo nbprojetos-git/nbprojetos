@@ -447,43 +447,51 @@ section[id] {
   object-fit: contain;
 }
 /* CSS exclusivo para a página projetos-produto */
-body.projetos-produto-page .projeto-img-wrapper {
+body.projetos-produto-page .projeto-card {
   position: relative;
-  overflow: hidden; /* importante para esconder tudo que passar do container */
-  cursor: pointer;
-  height: auto; /* para garantir que o container fique com altura da imagem */
-  display: block;
-}
-body.projetos-produto-page .projeto-img-wrapper img {
-  width: 100%;
-  height: 250px; /* altura fixa, pode ajustar */
-  object-fit: cover; /* mantém o enquadramento, cortando o excesso */
-  display: block;
-}
-body.projetos-produto-page .projeto-img-wrapper:hover img {
-  transform: translateY(-20px);
+  overflow: hidden;
 }
 
-body.projetos-produto-page .hover-bar {
+body.projetos-produto-page .projeto-card .projeto-img-wrapper {
+  position: relative;
+  height: 250px; /* altura fixa da imagem e do container */
+  overflow: hidden;
+}
+
+body.projetos-produto-page .projeto-card .projeto-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+body.projetos-produto-page .projeto-card:hover .projeto-img-wrapper img {
+  transform: translateY(-10px); /* imagem sobe no hover */
+}
+
+body.projetos-produto-page .projeto-card .hover-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #E65100; /* laranja */
-  color: white;
+  height: 40px; /* altura da barra */
+  background-color: #e36d03; /* cor laranja */
+  color: #fff;
   font-weight: 600;
-  text-align: center;
-  padding: 10px 0;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-  font-family: 'Arial', sans-serif;
   font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  opacity: 0;
   pointer-events: none;
-  box-sizing: border-box; /* para evitar overflow por padding */
-  z-index: 10;
+  transition: opacity 0.3s ease;
+  user-select: none;
 }
 
-body.projetos-produto-page .projeto-img-wrapper:hover .hover-bar {
-  transform: translateY(0);
+body.projetos-produto-page .projeto-card:hover .hover-bar {
+  opacity: 1;
   pointer-events: auto;
 }
