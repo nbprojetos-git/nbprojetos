@@ -449,8 +449,10 @@ section[id] {
 /* CSS exclusivo para a página projetos-produto */
 body.projetos-produto-page .projeto-img-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* importante para esconder tudo que passar do container */
   cursor: pointer;
+  height: auto; /* para garantir que o container fique com altura da imagem */
+  display: block;
 }
 
 body.projetos-produto-page .projeto-img-wrapper img {
@@ -479,6 +481,8 @@ body.projetos-produto-page .hover-bar {
   font-family: 'Arial', sans-serif;
   font-size: 1rem;
   pointer-events: none;
+  box-sizing: border-box; /* para evitar overflow por padding */
+  z-index: 10;
 }
 
 body.projetos-produto-page .projeto-img-wrapper:hover .hover-bar {
