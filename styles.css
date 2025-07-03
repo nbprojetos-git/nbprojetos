@@ -446,86 +446,42 @@ section[id] {
   width: auto;
   object-fit: contain;
 }
-/* -------- Estilos exclusivos da página Projetos de Produto -------- */
-.projetos-produto-page .projetos-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.projetos-produto-page .projeto-card {
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+/* CSS exclusivo para a página projetos-produto */
+body.projetos-produto-page .projeto-img-wrapper {
   position: relative;
-}
-
-.projetos-produto-page .projeto-img-wrapper {
   overflow: hidden;
-  height: 250px;
+  cursor: pointer;
 }
 
-.projetos-produto-page .projeto-img-wrapper img {
+body.projetos-produto-page .projeto-img-wrapper img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
-.projetos-produto-page .projeto-info {
-  background-color: #ff6f00;
-  color: #fff;
-  padding: 15px 20px;
-  text-align: left;
+body.projetos-produto-page .projeto-img-wrapper:hover img {
+  transform: translateY(-20px);
+}
+
+body.projetos-produto-page .hover-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #E65100; /* laranja */
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 0;
   transform: translateY(100%);
-  transition: transform 0.5s ease;
-  font-size: 0.95rem;
+  transition: transform 0.3s ease;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  pointer-events: none;
 }
 
-.projetos-produto-page .projeto-card:hover .projeto-img-wrapper img {
-  transform: translateY(-20%);
-}
-
-.projetos-produto-page .projeto-card:hover .projeto-info {
+body.projetos-produto-page .projeto-img-wrapper:hover .hover-bar {
   transform: translateY(0);
-}
-
-.projetos-produto-page .projeto-info h3 {
-  margin: 0 0 5px;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.projetos-produto-page .projeto-info p {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-@media (max-width: 1024px) {
-  .projetos-produto-page .projetos-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .projetos-produto-page .projetos-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 16px;
-    padding-bottom: 10px;
-  }
-
-  .projetos-produto-page .projeto-card {
-    flex: 0 0 auto;
-    width: 250px;
-  }
-
-  .projetos-produto-page .projeto-img-wrapper img {
-    height: 250px;
-    object-fit: cover;
-  }
+  pointer-events: auto;
 }
