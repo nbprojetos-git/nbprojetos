@@ -447,15 +447,17 @@ section[id] {
   object-fit: contain;
 }
 /* CSS exclusivo para a página projetos-produto */
+
 body.projetos-produto-page .projeto-card {
   position: relative;
   overflow: hidden;
 }
 
 body.projetos-produto-page .projeto-card .projeto-img-wrapper {
+  border-radius: 12px; /* arredonda o container da imagem */
+  overflow: hidden;    /* corta tudo que passar da borda */
   position: relative;
-  height: 250px; /* altura fixa da imagem e do container */
-  overflow: hidden;
+  height: 250px;
 }
 
 body.projetos-produto-page .projeto-card .projeto-img-wrapper img {
