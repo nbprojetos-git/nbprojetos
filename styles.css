@@ -452,21 +452,18 @@ section[id] {
 /* Barra escura com fundo igual ao header */
 .barra-escura-produto {
   background-color: #2c2c2c;
-  color: #ffffff;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 12px 0px;
+  padding: 8px 20px; /* altura reduzida */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .titulo-produto {
-  color: #ff6f00;
-  font-size: 2rem;
+  color: #ff6f00; /* laranja igual aos links do menu */
+  font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
   text-transform: uppercase;
-  text-align: left;
 }
 
 .texto-experiencia {
