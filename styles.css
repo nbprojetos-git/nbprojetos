@@ -448,6 +448,27 @@ section[id] {
 }
 
 /* CSS exclusivo para a página projetos-produto */
+
+.barra-topo-escura {
+  background-color: #2c2c2c;
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.motivo-desenvolver {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  font-family: 'Exo 2', Arial, sans-serif;
+}
+
 body.projetos-produto-page .projeto-card {
   position: relative;
   overflow: hidden;
