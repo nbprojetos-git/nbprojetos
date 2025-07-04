@@ -449,24 +449,26 @@ section[id] {
 
 /* CSS exclusivo para a página projetos-produto */
 
-.barra-topo-escura {
+/* Barra escura com fundo igual ao header */
+.barra-escura-produto {
   background-color: #2c2c2c;
-  color: #fff;
-  padding: 30px 20px;
+  color: #ffffff;
   text-align: center;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
+  padding: 40px 20px;
 }
 
-.motivo-desenvolver {
+/* Texto explicativo com margens generosas e legibilidade */
+.texto-experiencia {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   line-height: 1.7;
-  color: #333;
-  font-family: 'Exo 2', Arial, sans-serif;
+  color: #333333;
+  font-family: 'Exo 2', Arial, sans-serif;
 }
 
 body.projetos-produto-page .projeto-card {
