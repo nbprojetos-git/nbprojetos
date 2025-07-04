@@ -460,6 +460,24 @@ section[id] {
   padding: 40px 20px;
 }
 
+.titulo-produto {
+  color: #ff6f00;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.texto-experiencia {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #333;
+  font-family: 'Exo 2', Arial, sans-serif;
+}
 /* Texto explicativo com margens generosas e legibilidade */
 .texto-experiencia {
   max-width: 1200px;
