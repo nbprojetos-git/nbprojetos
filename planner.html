@@ -1,497 +1,203 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Planner Simples - Kanban Projetos</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    background: #f0f2f5;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  header {
-    background: #0078d7;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.4rem;
-  }
-  #board {
-    flex: 1;
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    overflow-x: auto;
-  }
-  .column {
-    background: white;
-    border-radius: 8px;
-    padding: 1rem;
-    width: 320px;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .column h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-    border-bottom: 2px solid #0078d7;
-    padding-bottom: 0.5rem;
-  }
-  #addProjectBtn {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    background: #0078d7;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  .card {
-    background: #e9f0ff;
-    border-radius: 6px;
-    padding: 0.7rem 1rem;
-    margin-bottom: 1rem;
-    cursor: grab;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
-    display: flex;
-    flex-direction: column;
-  }
-  .card.dragging {
-    opacity: 0.6;
-  }
-  .card .title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
-  }
-  .priority {
-    padding: 0.1rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    width: fit-content;
-    margin-bottom: 0.6rem;
-    color: white;
-    user-select: none;
-  }
-  .priority.alta { background-color: #d32f2f; }
-  .priority.media { background-color: #f57c00; }
-  .priority.baixa { background-color: #388e3c; }
-  .card small {
-    color: #555;
-    margin-bottom: 0.4rem;
-  }
-  .checklist {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .checklist label {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    margin-bottom: 0.3rem;
-  }
-  .checklist input[type=checkbox] {
-    margin-right: 0.5rem;
-  }
-  textarea {
-    width: 100%;
-    min-height: 60px;
-    resize: vertical;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 0.4rem;
-    font-family: inherit;
-    font-size: 0.9rem;
-  }
-  .btn-group {
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  .btn {
-    background: #0078d7;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    padding: 0.4rem 0.8rem;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-  }
-  .btn.danger {
-    background: #d32f2f;
-  }
-  #dashboard {
-    background: white;
-    padding: 1rem;
-    margin: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-    max-width: 800px;
-    align-self: center;
-  }
-  #dashboard h2 {
-    margin-top: 0;
-  }
-  #dashboard p {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  #dashboard span {
-    font-weight: normal;
-    color: #333;
-  }
-  #exportImportBtns {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem;
-  }
-  #exportImportBtns button {
-    background: #0078d7;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    padding: 0.6rem 1rem;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  /* Scrollbar style */
-  #board::-webkit-scrollbar {
-    height: 8px;
-  }
-  #board::-webkit-scrollbar-thumb {
-    background: #0078d7;
-    border-radius: 4px;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planner de Projetos</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background-color: #f4f4f4;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo-topo {
+      color: #ff6f00;
+      margin: 0;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .nav-menu a {
+      text-decoration: none;
+      color: #333;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+    .nav-menu a.active {
+      color: #ff6f00;
+      border-bottom: 2px solid #ff6f00;
+    }
+    .kanban-container {
+      display: flex;
+      gap: 20px;
+      height: calc(100vh - 70px);
+      padding: 20px;
+      overflow-x: auto;
+      background-color: #f0f0f0;
+    }
+    .kanban-column {
+      flex: 1;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      min-width: 300px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .kanban-column h3 {
+      color: #ff6f00;
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+    .card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: grab;
+    }
+    .card textarea,
+    .card input {
+      width: 100%;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    .dashboard-section {
+      display: none;
+      padding: 20px;
+    }
+    .dashboard-section.active {
+      display: block;
+    }
+    canvas {
+      max-width: 100%;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1 class="logo-topo">Planner</h1>
+    <nav class="nav-menu">
+      <a href="#" onclick="showTab('kanban')" class="active">Kanban</a>
+      <a href="#" onclick="showTab('dashboard')">Dashboard</a>
+      <button onclick="exportJSON()">Exportar</button>
+      <input type="file" onchange="importJSON(event)" />
+    </nav>
+  </header>
 
-<header>Planner Simples - Kanban Projetos</header>
+  <main>
+    <section id="kanban-tab" class="kanban-container">
+      <div class="kanban-column" id="todo">
+        <h3>A Fazer</h3>
+      </div>
+      <div class="kanban-column" id="doing">
+        <h3>Fazendo</h3>
+      </div>
+      <div class="kanban-column" id="done">
+        <h3>Feito</h3>
+      </div>
+    </section>
 
-<div id="board">
-  <div class="column" data-status="todo">
-    <h2>A Fazer</h2>
-    <button id="addProjectBtn" onclick="abrirModal()">+ Novo Projeto</button>
-    <div class="cards-container" id="todo"></div>
-  </div>
-  <div class="column" data-status="doing">
-    <h2>Fazendo</h2>
-    <div class="cards-container" id="doing"></div>
-  </div>
-  <div class="column" data-status="done">
-    <h2>Feito</h2>
-    <div class="cards-container" id="done"></div>
-  </div>
-</div>
+    <section id="dashboard-tab" class="dashboard-section">
+      <h2>Dashboard</h2>
+      <canvas id="chart1" height="100"></canvas>
+    </section>
+  </main>
 
-<div id="dashboard">
-  <h2>Dashboard</h2>
-  <p>Total de Projetos: <span id="totalProjects">0</span></p>
-  <p>Horas Estimadas: <span id="totalEstimated">0</span></p>
-  <p>Horas Reais: <span id="totalReal">0</span></p>
-  <p>Faturamento Total: R$ <span id="totalValue">0.00</span></p>
-  <p>Meta Mensal: R$ <input type="number" id="metaMensal" value="6200" min="0" step="0.01" style="width:120px;" oninput="atualizarDashboard()" /> </p>
-  <p>Percentual da Meta: <span id="percentualMeta">0%</span></p>
-</div>
+  <script>
+    const data = {
+      todo: [],
+      doing: [],
+      done: []
+    };
 
-<div id="exportImportBtns">
-  <button onclick="exportarDados()">Exportar JSON</button>
-  <button onclick="document.getElementById('inputImportar').click()">Importar JSON</button>
-  <input type="file" id="inputImportar" style="display:none" accept=".json" onchange="importarDados(event)" />
-</div>
-
-<!-- Modal para adicionar/editar projeto -->
-<div id="modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;">
-  <div style="background:white;padding:1rem 1.5rem;border-radius:8px;max-width:450px;width:90%;max-height:90%;overflow:auto;position:relative;">
-    <h2 id="modalTitle">Novo Projeto</h2>
-    <label>Nome do Projeto:<br/><input type="text" id="modalNome" /></label><br/>
-    <label>Cliente:<br/><input type="text" id="modalCliente" /></label><br/>
-    <label>Horas Estimadas:<br/><input type="number" id="modalEstimado" min="0" /></label><br/>
-    <label>Horas Reais:<br/><input type="number" id="modalReal" min="0" /></label><br/>
-    <label>Valor Combinado (R$):<br/><input type="number" id="modalValor" min="0" step="0.01" /></label><br/>
-    <label>Prioridade:<br/>
-      <select id="modalPrioridade">
-        <option value="alta">Alta</option>
-        <option value="media" selected>Média</option>
-        <option value="baixa">Baixa</option>
-      </select>
-    </label><br/>
-    <label>Observações:<br/><textarea id="modalObs" rows="3"></textarea></label><br/>
-    <fieldset style="border:1px solid #ccc;padding:10px;margin-top:10px;">
-      <legend>Checklist</legend>
-      <label><input type="checkbox" id="chkBriefing" /> Briefing</label><br/>
-      <label><input type="checkbox" id="chkModelagem" /> Modelagem</label><br/>
-      <label><input type="checkbox" id="chkRevisao" /> Revisão</label><br/>
-      <label><input type="checkbox" id="chkEntrega" /> Entrega</label>
-    </fieldset>
-    <div style="text-align:right;margin-top:15px;">
-      <button onclick="fecharModal()" style="margin-right:10px;">Cancelar</button>
-      <button onclick="salvarProjeto()">Salvar</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  let projetos = [];
-  let editIndex = null;
-
-  // Salvar e carregar do localStorage
-  function salvarLocal() {
-    localStorage.setItem('kanbanProjetos', JSON.stringify(projetos));
-  }
-  function carregarLocal() {
-    const data = localStorage.getItem('kanbanProjetos');
-    if(data) {
-      projetos = JSON.parse(data);
-    }
-  }
-
-  function atualizarDashboard() {
-    const totalProjects = projetos.length;
-    const totalEstimated = projetos.reduce((a,b) => a + (b.estimado||0), 0);
-    const totalReal = projetos.reduce((a,b) => a + (b.real||0), 0);
-    const totalValue = projetos.reduce((a,b) => a + (b.valor||0), 0);
-
-    document.getElementById('totalProjects').textContent = totalProjects;
-    document.getElementById('totalEstimated').textContent = totalEstimated;
-    document.getElementById('totalReal').textContent = totalReal;
-    document.getElementById('totalValue').textContent = totalValue.toFixed(2);
-
-    const meta = Number(document.getElementById('metaMensal').value) || 1;
-    let perc = Math.min(100, (totalValue / meta) * 100);
-    document.getElementById('percentualMeta').textContent = perc.toFixed(2) + '%';
-  }
-
-  function renderizar() {
-    const todo = document.getElementById('todo');
-    const doing = document.getElementById('doing');
-    const done = document.getElementById('done');
-    todo.innerHTML = '';
-    doing.innerHTML = '';
-    done.innerHTML = '';
-
-    projetos.forEach((p,i) => {
+    function createCard(content = {}) {
       const card = document.createElement('div');
-      card.className = 'card priority-' + p.prioridade;
+      card.className = 'card';
       card.draggable = true;
-      card.dataset.index = i;
-
       card.innerHTML = `
-        <div class="title">${p.nome}</div>
-        <div><small>Cliente: ${p.cliente || '-'}</small></div>
-        <div><small>Estimado: ${p.estimado || 0}h | Real: ${p.real || 0}h</small></div>
-        <div><small>Valor: R$ ${p.valor ? p.valor.toFixed(2) : '0.00'}</small></div>
-        <div>
-          <fieldset style="border:1px solid #ccc;padding:6px;margin-top:6px;">
-            <legend>Checklist</legend>
-            <label><input type="checkbox" data-index="${i}" data-check="briefing" ${p.checklist?.briefing ? 'checked' : ''} /> Briefing</label><br/>
-            <label><input type="checkbox" data-index="${i}" data-check="modelagem" ${p.checklist?.modelagem ? 'checked' : ''} /> Modelagem</label><br/>
-            <label><input type="checkbox" data-index="${i}" data-check="revisao" ${p.checklist?.revisao ? 'checked' : ''} /> Revisão</label><br/>
-            <label><input type="checkbox" data-index="${i}" data-check="entrega" ${p.checklist?.entrega ? 'checked' : ''} /> Entrega</label>
-          </fieldset>
-        </div>
-        <div style="margin-top:8px; text-align:right;">
-          <button onclick="editarProjeto(${i})" class="btn">Editar</button>
-          <button onclick="excluirProjeto(${i})" class="btn danger">Excluir</button>
-        </div>
+        <input placeholder="Projeto" value="${content.title || ''}" />
+        <input placeholder="Cliente" value="${content.client || ''}" />
+        <input type="number" placeholder="Horas" value="${content.hours || ''}" />
+        <input type="number" placeholder="Valor Total" value="${content.value || ''}" />
+        <input placeholder="Prioridade" value="${content.priority || ''}" />
+        <textarea placeholder="Observações">${content.notes || ''}</textarea>
+        <label><input type="checkbox" ${content.check ? 'checked' : ''}/> Concluído</label>
       `;
+      return card;
+    }
 
-      // Adicionar ao status correto
-      if(p.status === 'doing') doing.appendChild(card);
-      else if(p.status === 'done') done.appendChild(card);
-      else todo.appendChild(card);
-
-      // Drag and drop handlers
-      card.addEventListener('dragstart', dragStart);
-      card.addEventListener('dragend', dragEnd);
-    });
-
-    atualizarDashboard();
-  }
-
-  // Drag and Drop
-  let draggedCard = null;
-  function dragStart(e) {
-    draggedCard = this;
-    setTimeout(() => this.classList.add('dragging'), 0);
-  }
-  function dragEnd(e) {
-    this.classList.remove('dragging');
-    draggedCard = null;
-  }
-
-  // Permitir drop nas colunas
-  document.querySelectorAll('.column').forEach(col => {
-    col.addEventListener('dragover', e => {
-      e.preventDefault();
-      const dragging = document.querySelector('.dragging');
-      if(dragging) {
-        col.querySelector('.cards-container').appendChild(dragging);
-      }
-    });
-    col.addEventListener('drop', e => {
-      e.preventDefault();
-      if(draggedCard) {
-        const colStatus = col.dataset.status;
-        const idx = draggedCard.dataset.index;
-        projetos[idx].status = colStatus;
-        salvarLocal();
-        atualizarDashboard();
-        renderizar();
-      }
-    });
-  });
-
-  // Abrir modal para novo projeto
-  function abrirModal() {
-    editIndex = null;
-    document.getElementById('modalTitle').textContent = 'Novo Projeto';
-    ['modalNome','modalCliente','modalEstimado','modalReal','modalValor','modalPrioridade','modalObs','chkBriefing','chkModelagem','chkRevisao','chkEntrega']
-      .forEach(id => {
-        const el = document.getElementById(id);
-        if(el.type === 'checkbox') el.checked = false;
-        else if(el.tagName === 'SELECT') el.value = 'media';
-        else el.value = '';
+    function renderAll() {
+      ['todo', 'doing', 'done'].forEach(col => {
+        const column = document.getElementById(col);
+        column.innerHTML = `<h3>${column.querySelector('h3').textContent}</h3>`;
+        data[col].forEach(item => {
+          const card = createCard(item);
+          column.appendChild(card);
+        });
       });
-    document.getElementById('modal').style.display = 'flex';
-  }
-
-  // Fechar modal
-  function fecharModal() {
-    document.getElementById('modal').style.display = 'none';
-  }
-
-  // Salvar projeto (novo ou editar)
-  function salvarProjeto() {
-    const nome = document.getElementById('modalNome').value.trim();
-    if(!nome) {
-      alert('Informe o nome do projeto');
-      return;
     }
-    const projetoData = {
-      nome,
-      cliente: document.getElementById('modalCliente').value.trim(),
-      estimado: Number(document.getElementById('modalEstimado').value) || 0,
-      real: Number(document.getElementById('modalReal').value) || 0,
-      valor: Number(document.getElementById('modalValor').value) || 0,
-      prioridade: document.getElementById('modalPrioridade').value,
-      observacoes: document.getElementById('modalObs').value.trim(),
-      checklist: {
-        briefing: document.getElementById('chkBriefing').checked,
-        modelagem: document.getElementById('chkModelagem').checked,
-        revisao: document.getElementById('chkRevisao').checked,
-        entrega: document.getElementById('chkEntrega').checked
-      },
-      status: 'todo'
-    };
-    if(editIndex !== null) {
-      projetoData.status = projetos[editIndex].status;
-      projetos[editIndex] = projetoData;
-    } else {
-      projetos.push(projetoData);
+
+    function showTab(tab) {
+      document.querySelector('#kanban-tab').style.display = tab === 'kanban' ? 'flex' : 'none';
+      document.querySelector('#dashboard-tab').classList.toggle('active', tab === 'dashboard');
+      document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+      document.querySelectorAll('.nav-menu a').forEach(a => {
+        if (a.textContent.toLowerCase().includes(tab)) a.classList.add('active');
+      });
     }
-    salvarLocal();
-    fecharModal();
-    renderizar();
-  }
 
-  // Editar projeto
-  function editarProjeto(idx) {
-    editIndex = idx;
-    const p = projetos[idx];
-    document.getElementById('modalTitle').textContent = 'Editar Projeto';
-    document.getElementById('modalNome').value = p.nome;
-    document.getElementById('modalCliente').value = p.cliente;
-    document.getElementById('modalEstimado').value = p.estimado;
-    document.getElementById('modalReal').value = p.real;
-    document.getElementById('modalValor').value = p.valor;
-    document.getElementById('modalPrioridade').value = p.prioridade;
-    document.getElementById('modalObs').value = p.observacoes;
-    document.getElementById('chkBriefing').checked = p.checklist.briefing;
-    document.getElementById('chkModelagem').checked = p.checklist.modelagem;
-    document.getElementById('chkRevisao').checked = p.checklist.revisao;
-    document.getElementById('chkEntrega').checked = p.checklist.entrega;
-    document.getElementById('modal').style.display = 'flex';
-  }
-
-  // Excluir projeto
-  function excluirProjeto(idx) {
-    if(confirm(`Excluir projeto "${projetos[idx].nome}"?`)) {
-      projetos.splice(idx,1);
-      salvarLocal();
-      renderizar();
+    function exportJSON() {
+      const exportData = JSON.stringify(data);
+      const blob = new Blob([exportData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'planner_backup.json';
+      a.click();
+      URL.revokeObjectURL(url);
     }
-  }
 
-  // Atualizar checklist via checkbox no cartão
-  document.body.addEventListener('change', e => {
-    if(e.target.matches('.card fieldset input[type=checkbox]')) {
-      const idx = e.target.dataset.index;
-      const check = e.target.dataset.check;
-      if(idx !== undefined && check) {
-        projetos[idx].checklist[check] = e.target.checked;
-        salvarLocal();
-        atualizarDashboard();
-      }
+    function importJSON(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = e => {
+        Object.assign(data, JSON.parse(e.target.result));
+        renderAll();
+        renderChart();
+      };
+      reader.readAsText(file);
     }
-  });
 
-  // Exportar dados para JSON
-  function exportarDados() {
-    const dadosStr = JSON.stringify(projetos, null, 2);
-    const blob = new Blob([dadosStr], {type: 'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'kanban_projetos_backup.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  // Importar dados JSON
-  function importarDados(event) {
-    const file = event.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-      try {
-        const dados = JSON.parse(e.target.result);
-        if(Array.isArray(dados)) {
-          projetos = dados;
-          salvarLocal();
-          renderizar();
-          atualizarDashboard();
-          alert('Dados importados com sucesso!');
-        } else {
-          alert('Arquivo JSON inválido!');
+    function renderChart() {
+      const ctx = document.getElementById('chart1').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['A Fazer', 'Fazendo', 'Feito'],
+          datasets: [{
+            label: 'Projetos',
+            data: [data.todo.length, data.doing.length, data.done.length],
+            backgroundColor: ['#ccc', '#ff6f00', '#4caf50']
+          }]
         }
-      } catch {
-        alert('Erro ao ler arquivo JSON!');
-      }
-      event.target.value = ''; // reset input
+      });
+    }
+
+    window.onload = () => {
+      renderAll();
+      renderChart();
     };
-    reader.readAsText(file);
-  }
-
-  // Inicialização
-  carregarLocal();
-  renderizar();
-  atualizarDashboard();
-
-</script>
-
+  </script>
 </body>
 </html>
