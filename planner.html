@@ -95,5 +95,12 @@
 
   <!-- Scripts da aplicação -->
   <script src="kanban.js" type="module"></script>
+  <script>
+  function showTab(tabId) {
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.style.display = (tab.id === tabId) ? 'block' : 'none';
+    });
+  }
+</script>
 </body>
 </html>
