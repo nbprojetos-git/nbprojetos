@@ -1,106 +1,762 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planner NB Projetos</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* ... estilos anteriores mantidos ... */
-    /* Filtros */
-    #filtros {
-      padding: 10px;
-      background-color: #f9f9f9;
-      display: flex;
-      gap: 10px;
-      justify-content: flex-start;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Planner NB Projetos</title>
+
+<!-- Font Awesome para ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<!-- Fonte Inter (limpa e moderna) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* RESET E BASE */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    height: 100vh;
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: #005a9e;
+    color: white;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    user-select: none;
+  }
+
+  #app-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 64px);
+  }
+
+  /* SIDEBAR */
+  #sidebar {
+    width: 240px;
+    background-color: #0078d4;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  #sidebar h2 {
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+  }
+
+  #sidebar button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  #sidebar button:hover,
+  #sidebar button.active {
+    background-color: #004a85;
+  }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    background: white;
+    border-radius: 8px 0 0 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* FILTROS */
+  #filtros {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  #filtros select {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    flex: 1;
+  }
+
+  /* KANBAN */
+  #kanban {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  .kanban-column {
+    background-color: #e5f1fb;
+    border-radius: 8px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  }
+
+  .kanban-column-header {
+    background-color: #0078d4;
+    color: white;
+    padding: 1rem;
+    font-weight: 700;
+    border-radius: 8px 8px 0 0;
+    user-select: none;
+  }
+
+  .kanban-cards {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .kanban-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .kanban-card:hover {
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background-color: #005a9e;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  .card-assignee {
+    background-color: #0078d4;
+    color: white;
+    font-weight: 600;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* MODAL */
+  #project-modal {
+    display: none;
+    position: fixed;
+    top:0; left:0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0,0,0,0.45);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  #project-modal.active {
+    display: flex;
+  }
+
+  .modal-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .modal-content label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+
+  .modal-content input,
+  .modal-content select,
+  .modal-content textarea {
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+
+  .modal-content textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .modal-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background-color: #0078d4;
+    color: white;
+  }
+
+  .btn-secondary {
+    background-color: #ccc;
+    color: #333;
+  }
+
+  /* DASHBOARD */
+  #dashboard-tab {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* FORM NOVO PROJETO */
+  #project-form {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #project-form input,
+  #project-form select,
+  #project-form textarea {
+    padding: 0.6rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  #project-form button {
+    align-self: flex-start;
+  }
+
+  /* RESPONSIVO */
+  @media (max-width: 768px) {
+    #app-container {
+      flex-direction: column;
+      height: auto;
     }
-  </style>
+    #sidebar {
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 0.5rem;
+    }
+    #sidebar button {
+      flex: 1;
+      font-size: 0.9rem;
+      padding: 0.6rem 0.8rem;
+    }
+    main {
+      border-radius: 0;
+      padding: 1rem;
+    }
+    #kanban {
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+    }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Planner NB Projetos</h1>
-    <div id="user-info"></div>
-  </header>
-  <nav>
-    <button onclick="showTab('kanban-tab')">Kanban</button>
-    <button onclick="showTab('dashboard-tab')">Dashboard</button>
-    <button onclick="showTab('new-project-tab')">Novo Projeto</button>
-  </nav>
 
-  <section id="kanban-tab" class="tab">
-    <div id="filtros">
-      <select id="filter-client" onchange="applyFilters()">
-        <option value="">Todos os clientes</option>
+<header>
+  Planner NB Projetos - <span id="user-info">Carregando...</span>
+</header>
+
+<div id="app-container">
+  <aside id="sidebar">
+    <h2>Menu</h2>
+    <button id="btn-kanban" class="active" onclick="showTab('kanban-tab')"><i class="fa-solid fa-table-columns"></i> Kanban</button>
+    <button id="btn-dashboard" onclick="showTab('dashboard-tab')"><i class="fa-solid fa-chart-pie"></i> Dashboard</button>
+    <button id="btn-new-project" onclick="showTab('new-project-tab')"><i class="fa-solid fa-plus"></i> Novo Projeto</button>
+    <button id="btn-logout" style="margin-top:auto; background:#b91c1c;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </aside>
+
+  <main>
+    <!-- KANBAN -->
+    <section id="kanban-tab" class="tab" style="display: block; height: 100%;">
+      <div id="filtros">
+        <select id="filter-client" onchange="applyFilters()">
+          <option value="">Todos os clientes</option>
+        </select>
+        <select id="filter-project" onchange="applyFilters()">
+          <option value="">Todos os projetos</option>
+        </select>
+      </div>
+
+      <div id="kanban">
+        <!-- Colunas e cards gerados por JS -->
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard-tab" class="tab" style="display:none; height: 100%;">
+      <canvas id="dashboardChart" style="width:100%; height:100%;"></canvas>
+    </section>
+
+    <!-- NOVO PROJETO -->
+    <section id="new-project-tab" class="tab" style="display:none;">
+      <h2>Criar Novo Projeto</h2>
+      <form id="project-form">
+        <label for="title">Título do Projeto</label>
+        <input type="text" id="title" required />
+
+        <label for="client">Cliente</label>
+        <input type="text" id="client" required />
+
+        <label for="project">Projeto</label>
+        <input type="text" id="project" required />
+
+        <label for="assignee">Responsável</label>
+        <input type="text" id="assignee" placeholder="Nome ou iniciais" required />
+
+        <label for="dueDate">Data de Entrega</label>
+        <input type="date" id="dueDate" required />
+
+        <label for="description">Descrição</label>
+        <textarea id="description" rows="4"></textarea>
+
+        <button type="submit" class="btn btn-primary">Adicionar Projeto</button>
+      </form>
+    </section>
+  </main>
+</div>
+
+<!-- MODAL DETALHES -->
+<div id="project-modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" aria-label="Fechar modal">&times;</button>
+    <h2 id="modal-title">Detalhes do Projeto</h2>
+    <form id="modal-form">
+      <label for="modal-title-input">Título</label>
+      <input type="text" id="modal-title-input" required />
+
+      <label for="modal-client-input">Cliente</label>
+      <input type="text" id="modal-client-input" required />
+
+      <label for="modal-project-input">Projeto</label>
+      <input type="text" id="modal-project-input" required />
+
+      <label for="modal-assignee-input">Responsável</label>
+      <input type="text" id="modal-assignee-input" required />
+
+      <label for="modal-dueDate-input">Data de Entrega</label>
+      <input type="date" id="modal-dueDate-input" required />
+
+      <label for="modal-description-input">Descrição</label>
+      <textarea id="modal-description-input" rows="5"></textarea>
+
+      <label for="modal-status-select">Status</label>
+      <select id="modal-status-select" required>
+        <option value="A Fazer">A Fazer</option>
+        <option value="Em Andamento">Em Andamento</option>
+        <option value="Concluído">Concluído</option>
       </select>
-      <select id="filter-project" onchange="applyFilters()">
-        <option value="">Todos os projetos</option>
-      </select>
-    </div>
-    <div id="kanban">
-      <!-- Colunas A Fazer, Em Andamento, Concluído -->
-    </div>
-  </section>
 
-  <section id="dashboard-tab" class="tab" style="display: none">
-    <canvas id="dashboardChart"></canvas>
-  </section>
-
-  <section id="new-project-tab" class="tab" style="display: none">
-    <form id="project-form">
-      <!-- Formulário para novo projeto -->
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="modal-delete-btn">Excluir</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
     </form>
-  </section>
+  </div>
+</div>
 
-  <!-- Modal para detalhes -->
-  <div id="project-modal" style="display:none;"></div>
+<!-- Firebase SDK e Chart.js -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, onSnapshot, query, where, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import Chart from 'https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.esm.js';
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyA5cFM7baPCN_9QXDgYYybooj-DHVBsAsY",
+    authDomain: "plannernb.firebaseapp.com",
+    projectId: "plannernb",
+    storageBucket: "plannernb.firebasestorage.app",
+    messagingSenderId: "629344668472",
+    appId: "1:629344668472:web:a49faf88027c0a23728fcd"
+  };
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyA5cFM7baPCN_9QXDgYYybooj-DHVBsAsY",
-      authDomain: "plannernb.firebaseapp.com",
-      projectId: "plannernb",
-      storageBucket: "plannernb.firebasestorage.app",
-      messagingSenderId: "629344668472",
-      appId: "1:629344668472:web:a49faf88027c0a23728fcd"
-    };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+  // Referências e variáveis globais
+  const statuses = ["A Fazer", "Em Andamento", "Concluído"];
+  let allProjects = []; // Todos os projetos do Firestore
+  let filteredProjects = [];
+  let currentUser = null;
 
-    const login = async () => {
-      const provider = new GoogleAuthProvider();
+  // Elementos DOM
+  const userInfo = document.getElementById('user-info');
+  const kanban = document.getElementById('kanban');
+  const filterClient = document.getElementById('filter-client');
+  const filterProject = document.getElementById('filter-project');
+
+  const projectForm = document.getElementById('project-form');
+
+  const modal = document.getElementById('project-modal');
+  const modalCloseBtn = modal.querySelector('.modal-close');
+  const modalForm = document.getElementById('modal-form');
+  const modalDeleteBtn = document.getElementById('modal-delete-btn');
+
+  let currentEditingId = null;
+
+  // Função para autenticar usuário Google
+  async function login() {
+    const provider = new GoogleAuthProvider();
+    try {
       await signInWithPopup(auth, provider);
-    };
+    } catch (error) {
+      alert("Erro ao autenticar: " + error.message);
+    }
+  }
 
-    onAuthStateChanged(auth, async user => {
-      if (user) {
-        document.getElementById('user-info').innerText = `Olá, ${user.displayName}`;
-        // Aqui vamos carregar os dados dos projetos e preencher filtros
-      } else {
-        await login();
-      }
-    });
-
-    // Exporte referências para usar nos scripts do Kanban
-    window.firebaseRefs = { db, collection, addDoc, getDocs, updateDoc, doc, onSnapshot, query, where };
-  </script>
-
-  <!-- Scripts da aplicação -->
-  <script src="kanban.js" type="module"></script>
-  <script>
-  function showTab(tabId) {
+  // Mostrar tab selecionada
+  window.showTab = function(tabId) {
     document.querySelectorAll('.tab').forEach(tab => {
       tab.style.display = (tab.id === tabId) ? 'block' : 'none';
     });
+    document.querySelectorAll('#sidebar button').forEach(btn => btn.classList.remove('active'));
+    if(tabId === 'kanban-tab') document.getElementById('btn-kanban').classList.add('active');
+    if(tabId === 'dashboard-tab') document.getElementById('btn-dashboard').classList.add('active');
+    if(tabId === 'new-project-tab') document.getElementById('btn-new-project').classList.add('active');
   }
+
+  // Preencher filtros únicos de cliente e projeto
+  function populateFilters(projects) {
+    const clients = Array.from(new Set(projects.map(p => p.client).filter(Boolean))).sort();
+    const projectsList = Array.from(new Set(projects.map(p => p.project).filter(Boolean))).sort();
+
+    filterClient.innerHTML = '<option value="">Todos os clientes</option>' + clients.map(c => `<option value="${c}">${c}</option>`).join('');
+    filterProject.innerHTML = '<option value="">Todos os projetos</option>' + projectsList.map(p => `<option value="${p}">${p}</option>`).join('');
+  }
+
+  // Aplicar filtros
+  window.applyFilters = function() {
+    const clientVal = filterClient.value;
+    const projectVal = filterProject.value;
+
+    filteredProjects = allProjects.filter(p => {
+      return (clientVal === '' || p.client === clientVal) && (projectVal === '' || p.project === projectVal);
+    });
+    renderKanban(filteredProjects);
+  }
+
+  // Renderizar colunas e cards do Kanban
+  function renderKanban(projects) {
+    kanban.innerHTML = '';
+    statuses.forEach(status => {
+      const column = document.createElement('div');
+      column.className = 'kanban-column';
+      column.dataset.status = status;
+      column.innerHTML = `<div class="kanban-column-header">${status}</div><div class="kanban-cards" id="col-${status.replace(/\s+/g,'-')}"></div>`;
+      kanban.appendChild(column);
+    });
+
+    statuses.forEach(status => {
+      const container = document.getElementById(`col-${status.replace(/\s+/g,'-')}`);
+      const cards = projects.filter(p => p.status === status);
+      cards.forEach(card => {
+        const cardEl = document.createElement('div');
+        cardEl.className = 'kanban-card';
+        cardEl.setAttribute('draggable', 'true');
+        cardEl.dataset.id = card.id;
+
+        const initials = card.assignee ? card.assignee.trim().split(' ').map(n => n[0]).join('').toUpperCase() : '?';
+
+        cardEl.innerHTML = `
+          <h3 class="card-title">${card.title}</h3>
+          <div class="card-tags">
+            <span class="tag">${card.client}</span>
+            <span class="tag">${card.project}</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-assignee" title="${card.assignee}">${initials}</div>
+            <small>${card.dueDate ? new Date(card.dueDate).toLocaleDateString('pt-BR') : ''}</small>
+          </div>
+        `;
+
+        container.appendChild(cardEl);
+
+        // Evento abrir modal com detalhes
+        cardEl.addEventListener('click', () => openModal(card.id));
+
+        // Drag and Drop
+        cardEl.addEventListener('dragstart', dragStart);
+      });
+    });
+
+    // Configurar eventos drop nas colunas
+    document.querySelectorAll('.kanban-cards').forEach(col => {
+      col.addEventListener('dragover', dragOver);
+      col.addEventListener('drop', drop);
+    });
+  }
+
+  // Drag & Drop Handlers
+  let draggedCardId = null;
+
+  function dragStart(e) {
+    draggedCardId = e.target.dataset.id;
+    e.dataTransfer.effectAllowed = 'move';
+  }
+  function dragOver(e) {
+    e.preventDefault();
+  }
+  async function drop(e) {
+    e.preventDefault();
+    if (!draggedCardId) return;
+    const newStatus = e.currentTarget.parentElement.dataset.status;
+    // Atualizar status no Firebase
+    const projectRef = doc(db, "projects", draggedCardId);
+    try {
+      await updateDoc(projectRef, { status: newStatus });
+    } catch (error) {
+      alert('Erro ao mover projeto: ' + error.message);
+    }
+    draggedCardId = null;
+  }
+
+  // Abrir modal para editar projeto
+  function openModal(id) {
+    const project = allProjects.find(p => p.id === id);
+    if (!project) return;
+
+    currentEditingId = id;
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+
+    modalForm['modal-title-input'].value = project.title || '';
+    modalForm['modal-client-input'].value = project.client || '';
+    modalForm['modal-project-input'].value = project.project || '';
+    modalForm['modal-assignee-input'].value = project.assignee || '';
+    modalForm['modal-dueDate-input'].value = project.dueDate || '';
+    modalForm['modal-description-input'].value = project.description || '';
+    modalForm['modal-status-select'].value = project.status || 'A Fazer';
+  }
+
+  // Fechar modal
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    currentEditingId = null;
+  }
+
+  modalCloseBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Salvar edição do projeto no modal
+  modalForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!currentEditingId) return;
+
+    const updatedProject = {
+      title: modalForm['modal-title-input'].value.trim(),
+      client: modalForm['modal-client-input'].value.trim(),
+      project: modalForm['modal-project-input'].value.trim(),
+      assignee: modalForm['modal-assignee-input'].value.trim(),
+      dueDate: modalForm['modal-dueDate-input'].value,
+      description: modalForm['modal-description-input'].value.trim(),
+      status: modalForm['modal-status-select'].value
+    };
+
+    try {
+      const projectRef = doc(db, "projects", currentEditingId);
+      await updateDoc(projectRef, updatedProject);
+      closeModal();
+    } catch (error) {
+      alert('Erro ao salvar projeto: ' + error.message);
+    }
+  });
+
+  // Excluir projeto
+  modalDeleteBtn.addEventListener('click', async () => {
+    if (!currentEditingId) return;
+    if (!confirm('Tem certeza que deseja excluir este projeto?')) return;
+
+    try {
+      await deleteDoc(doc(db, "projects", currentEditingId));
+      closeModal();
+    } catch (error) {
+      alert('Erro ao excluir projeto: ' + error.message);
+    }
+  });
+
+  // Adicionar novo projeto pelo formulário
+  projectForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const newProject = {
+      title: projectForm['title'].value.trim(),
+      client: projectForm['client'].value.trim(),
+      project: projectForm['project'].value.trim(),
+      assignee: projectForm['assignee'].value.trim(),
+      dueDate: projectForm['dueDate'].value,
+      description: projectForm['description'].value.trim(),
+      status: "A Fazer",
+      createdAt: new Date()
+    };
+
+    try {
+      await addDoc(collection(db, "projects"), newProject);
+      projectForm.reset();
+      showTab('kanban-tab');
+    } catch (error) {
+      alert('Erro ao criar projeto: ' + error.message);
+    }
+  });
+
+  // Dashboard usando Chart.js (exemplo simples)
+  let dashboardChart = null;
+  function renderDashboard() {
+    const ctx = document.getElementById('dashboardChart').getContext('2d');
+
+    // Contar projetos por status
+    const statusCounts = statuses.map(status => filteredProjects.filter(p => p.status === status).length);
+
+    if (dashboardChart) dashboardChart.destroy();
+
+    dashboardChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: statuses,
+        datasets: [{
+          data: statusCounts,
+          backgroundColor: ['#0078d4', '#00a4ef', '#00c0f0']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' },
+          title: {
+            display: true,
+            text: 'Projetos por Status'
+          }
+        }
+      }
+    });
+  }
+
+  // Observar autenticação e carregar dados
+  onAuthStateChanged(auth, async user => {
+    if (user) {
+      currentUser = user;
+      userInfo.textContent = `Olá, ${user.displayName}`;
+
+      // Configurar logout
+      document.getElementById('btn-logout').onclick = async () => {
+        await signOut(auth);
+        location.reload();
+      };
+
+      // Observar dados da coleção projects em tempo real
+      const projectsCol = collection(db, "projects");
+      onSnapshot(projectsCol, snapshot => {
+        allProjects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        filteredProjects = [...allProjects];
+        populateFilters(allProjects);
+        applyFilters();
+        renderDashboard();
+      });
+
+    } else {
+      userInfo.textContent = 'Autenticando...';
+      await login();
+    }
+  });
 </script>
+
 </body>
 </html>
