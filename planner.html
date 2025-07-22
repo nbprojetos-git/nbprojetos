@@ -84,6 +84,9 @@
     canvas {
       max-width: 100%;
     }
+    .kanban-column button {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -98,17 +101,14 @@
 
   <main>
     <section id="kanban-tab" class="kanban-container">
-      <div class="kanban-column" id="todo">
+      <div class="kanban-column" id="todo" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
         <h3>A Fazer</h3>
-        <button onclick="addCard('todo')">+ Novo</button>
       </div>
-      <div class="kanban-column" id="doing">
+      <div class="kanban-column" id="doing" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
         <h3>Fazendo</h3>
-        <button onclick="addCard('doing')">+ Novo</button>
       </div>
-      <div class="kanban-column" id="done">
+      <div class="kanban-column" id="done" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
         <h3>Feito</h3>
-        <button onclick="addCard('done')">+ Novo</button>
       </div>
     </section>
 
@@ -149,9 +149,13 @@
       if (saved) data = JSON.parse(saved);
     }
 
-    function createCardElement(content = {}, columnName) {
+    function createCardElement(content = {}, columnName, index) {
       const card = document.createElement('div');
       card.className = 'card';
+      card.setAttribute('draggable', 'true');
+      card.setAttribute('data-index', index);
+      card.setAttribute('data-column', columnName);
+      card.ondragstart = drag;
       card.innerHTML = `
         <input placeholder="Projeto" value="${content.title || ''}" onchange="updateData('${columnName}')">
         <input placeholder="Cliente" value="${content.client || ''}" onchange="updateData('${columnName}')">
@@ -168,8 +172,8 @@
     function renderColumn(columnName) {
       const column = document.getElementById(columnName);
       column.querySelectorAll('.card').forEach(e => e.remove());
-      data[columnName].forEach(item => {
-        const card = createCardElement(item, columnName);
+      data[columnName].forEach((item, index) => {
+        const card = createCardElement(item, columnName, index);
         column.appendChild(card);
       });
     }
@@ -179,17 +183,8 @@
       renderChart();
     }
 
-    function addCard(columnName) {
-      const newCard = {
-        title: '', client: '', hours: '', value: '', priority: '', notes: '', check: false
-      };
-      data[columnName].push(newCard);
-      saveToLocalStorage();
-      renderAll();
-    }
-
     function removeCard(button, columnName) {
-      const index = Array.from(button.parentElement.parentElement.children).indexOf(button.parentElement) - 1;
+      const index = Array.from(button.parentElement.parentElement.children).indexOf(button.parentElement);
       data[columnName].splice(index, 1);
       saveToLocalStorage();
       renderAll();
@@ -212,6 +207,26 @@
       });
       saveToLocalStorage();
       renderChart();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text/plain", JSON.stringify({
+        fromColumn: ev.target.getAttribute('data-column'),
+        index: ev.target.getAttribute('data-index')
+      }));
+    }
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drop(ev, toColumn) {
+      ev.preventDefault();
+      const dataTransfer = JSON.parse(ev.dataTransfer.getData("text/plain"));
+      const item = data[dataTransfer.fromColumn].splice(dataTransfer.index, 1)[0];
+      data[toColumn].push(item);
+      saveToLocalStorage();
+      renderAll();
     }
 
     function showTab(tab) {
