@@ -1,281 +1,99 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planner de Projetos</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Planner NB Projetos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    header {
-      background-color: #f4f4f4;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .logo-topo {
-      color: #ff6f00;
-      margin: 0;
-    }
-    .nav-menu {
+    /* ... estilos anteriores mantidos ... */
+    /* Filtros */
+    #filtros {
+      padding: 10px;
+      background-color: #f9f9f9;
       display: flex;
       gap: 10px;
-      align-items: center;
-    }
-    .nav-menu a {
-      text-decoration: none;
-      color: #333;
-      padding: 6px 10px;
-      border-radius: 4px;
-    }
-    .nav-menu a.active {
-      color: #ff6f00;
-      border-bottom: 2px solid #ff6f00;
-    }
-    .kanban-container {
-      display: flex;
-      gap: 20px;
-      height: calc(100vh - 70px);
-      padding: 20px;
-      overflow-x: auto;
-      background-color: #f0f0f0;
-    }
-    .kanban-column {
-      flex: 1;
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 15px;
-      min-width: 300px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .kanban-column h3 {
-      color: #ff6f00;
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-    }
-    .card {
-      background: #fafafa;
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      cursor: grab;
-    }
-    .card input,
-    .card textarea {
-      width: 100%;
-      font-size: 0.9rem;
-      margin-bottom: 5px;
-    }
-    .dashboard-section,
-    .create-section {
-      display: none;
-      padding: 20px;
-    }
-    .dashboard-section.active,
-    .create-section.active {
-      display: block;
-    }
-    canvas {
-      max-width: 100%;
-    }
-    .kanban-column button {
-      display: none;
+      justify-content: flex-start;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1 class="logo-topo">Planner</h1>
-    <nav class="nav-menu">
-      <a href="#" onclick="showTab('kanban')" class="active">Kanban</a>
-      <a href="#" onclick="showTab('dashboard')">Dashboard</a>
-      <a href="#" onclick="showTab('create')">Novo Projeto</a>
-    </nav>
+    <h1>Planner NB Projetos</h1>
+    <div id="user-info"></div>
   </header>
+  <nav>
+    <button onclick="showTab('kanban-tab')">Kanban</button>
+    <button onclick="showTab('dashboard-tab')">Dashboard</button>
+    <button onclick="showTab('new-project-tab')">Novo Projeto</button>
+  </nav>
 
-  <main>
-    <section id="kanban-tab" class="kanban-container">
-      <div class="kanban-column" id="todo" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-        <h3>A Fazer</h3>
-      </div>
-      <div class="kanban-column" id="doing" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-        <h3>Fazendo</h3>
-      </div>
-      <div class="kanban-column" id="done" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-        <h3>Feito</h3>
-      </div>
-    </section>
+  <section id="kanban-tab" class="tab">
+    <div id="filtros">
+      <select id="filter-client" onchange="applyFilters()">
+        <option value="">Todos os clientes</option>
+      </select>
+      <select id="filter-project" onchange="applyFilters()">
+        <option value="">Todos os projetos</option>
+      </select>
+    </div>
+    <div id="kanban">
+      <!-- Colunas A Fazer, Em Andamento, Concluído -->
+    </div>
+  </section>
 
-    <section id="dashboard-tab" class="dashboard-section">
-      <h2>Dashboard</h2>
-      <canvas id="chart1" height="100"></canvas>
-    </section>
+  <section id="dashboard-tab" class="tab" style="display: none">
+    <canvas id="dashboardChart"></canvas>
+  </section>
 
-    <section id="create-tab" class="create-section">
-      <h2>Criar Novo Projeto</h2>
-      <form onsubmit="createNewProject(event)">
-        <input type="text" id="proj-title" placeholder="Título do projeto" required><br>
-        <input type="text" id="proj-client" placeholder="Cliente"><br>
-        <input type="number" id="proj-hours" placeholder="Horas estimadas"><br>
-        <input type="number" id="proj-value" placeholder="Valor total"><br>
-        <input type="text" id="proj-priority" placeholder="Prioridade"><br>
-        <textarea id="proj-notes" placeholder="Observações"></textarea><br>
-        <button type="submit">Adicionar ao Kanban</button>
-      </form>
-    </section>
-  </main>
+  <section id="new-project-tab" class="tab" style="display: none">
+    <form id="project-form">
+      <!-- Formulário para novo projeto -->
+    </form>
+  </section>
 
-  <script>
-    let data = {
-      todo: [],
-      doing: [],
-      done: []
+  <!-- Modal para detalhes -->
+  <div id="project-modal" style="display:none;"></div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5cFM7baPCN_9QXDgYYybooj-DHVBsAsY",
+      authDomain: "plannernb.firebaseapp.com",
+      projectId: "plannernb",
+      storageBucket: "plannernb.firebasestorage.app",
+      messagingSenderId: "629344668472",
+      appId: "1:629344668472:web:a49faf88027c0a23728fcd"
     };
 
-    const STORAGE_KEY = 'planner-data';
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    function saveToLocalStorage() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    }
-
-    function loadFromLocalStorage() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) data = JSON.parse(saved);
-    }
-
-    function createCardElement(content = {}, columnName, index) {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.setAttribute('draggable', 'true');
-      card.setAttribute('data-index', index);
-      card.setAttribute('data-column', columnName);
-      card.ondragstart = drag;
-      card.innerHTML = `
-        <input placeholder="Projeto" value="${content.title || ''}" onchange="updateData('${columnName}')">
-        <input placeholder="Cliente" value="${content.client || ''}" onchange="updateData('${columnName}')">
-        <input type="number" placeholder="Horas" value="${content.hours || ''}" onchange="updateData('${columnName}')">
-        <input type="number" placeholder="Valor Total" value="${content.value || ''}" onchange="updateData('${columnName}')">
-        <input placeholder="Prioridade" value="${content.priority || ''}" onchange="updateData('${columnName}')">
-        <textarea placeholder="Observações" onchange="updateData('${columnName}')">${content.notes || ''}</textarea>
-        <label><input type="checkbox" ${content.check ? 'checked' : ''} onchange="updateData('${columnName}')"/> Concluído</label>
-        <button onclick="removeCard(this, '${columnName}')">Excluir</button>
-      `;
-      return card;
-    }
-
-    function renderColumn(columnName) {
-      const column = document.getElementById(columnName);
-      column.querySelectorAll('.card').forEach(e => e.remove());
-      data[columnName].forEach((item, index) => {
-        const card = createCardElement(item, columnName, index);
-        column.appendChild(card);
-      });
-    }
-
-    function renderAll() {
-      ['todo', 'doing', 'done'].forEach(col => renderColumn(col));
-      renderChart();
-    }
-
-    function removeCard(button, columnName) {
-      const index = Array.from(button.parentElement.parentElement.children).indexOf(button.parentElement);
-      data[columnName].splice(index, 1);
-      saveToLocalStorage();
-      renderAll();
-    }
-
-    function updateData(columnName) {
-      const column = document.getElementById(columnName);
-      const cards = Array.from(column.querySelectorAll('.card'));
-      data[columnName] = cards.map(card => {
-        const inputs = card.querySelectorAll('input, textarea');
-        return {
-          title: inputs[0].value,
-          client: inputs[1].value,
-          hours: inputs[2].value,
-          value: inputs[3].value,
-          priority: inputs[4].value,
-          notes: inputs[5].value,
-          check: inputs[6].checked
-        };
-      });
-      saveToLocalStorage();
-      renderChart();
-    }
-
-    function drag(ev) {
-      ev.dataTransfer.setData("text/plain", JSON.stringify({
-        fromColumn: ev.target.getAttribute('data-column'),
-        index: ev.target.getAttribute('data-index')
-      }));
-    }
-
-    function allowDrop(ev) {
-      ev.preventDefault();
-    }
-
-    function drop(ev, toColumn) {
-      ev.preventDefault();
-      const dataTransfer = JSON.parse(ev.dataTransfer.getData("text/plain"));
-      const item = data[dataTransfer.fromColumn].splice(dataTransfer.index, 1)[0];
-      data[toColumn].push(item);
-      saveToLocalStorage();
-      renderAll();
-    }
-
-    function showTab(tab) {
-      document.querySelector('#kanban-tab').style.display = tab === 'kanban' ? 'flex' : 'none';
-      document.querySelector('#dashboard-tab').classList.toggle('active', tab === 'dashboard');
-      document.querySelector('#create-tab').classList.toggle('active', tab === 'create');
-      document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
-      document.querySelectorAll('.nav-menu a').forEach(a => {
-        if (a.textContent.toLowerCase().includes(tab)) a.classList.add('active');
-      });
-    }
-
-    function renderChart() {
-      const ctx = document.getElementById('chart1').getContext('2d');
-      if (window.myChart) window.myChart.destroy();
-      window.myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['A Fazer', 'Fazendo', 'Feito'],
-          datasets: [{
-            label: 'Projetos',
-            data: [data.todo.length, data.doing.length, data.done.length],
-            backgroundColor: ['#ccc', '#ff6f00', '#4caf50']
-          }]
-        }
-      });
-    }
-
-    function createNewProject(e) {
-      e.preventDefault();
-      const newCard = {
-        title: document.getElementById('proj-title').value,
-        client: document.getElementById('proj-client').value,
-        hours: document.getElementById('proj-hours').value,
-        value: document.getElementById('proj-value').value,
-        priority: document.getElementById('proj-priority').value,
-        notes: document.getElementById('proj-notes').value,
-        check: false
-      };
-      data.todo.push(newCard);
-      saveToLocalStorage();
-      renderAll();
-      showTab('kanban');
-    }
-
-    window.onload = () => {
-      loadFromLocalStorage();
-      renderAll();
+    const login = async () => {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
     };
+
+    onAuthStateChanged(auth, async user => {
+      if (user) {
+        document.getElementById('user-info').innerText = `Olá, ${user.displayName}`;
+        // Aqui vamos carregar os dados dos projetos e preencher filtros
+      } else {
+        await login();
+      }
+    });
+
+    // Exporte referências para usar nos scripts do Kanban
+    window.firebaseRefs = { db, collection, addDoc, getDocs, updateDoc, doc, onSnapshot, query, where };
   </script>
+
+  <!-- Scripts da aplicação -->
+  <script src="kanban.js" type="module"></script>
 </body>
 </html>
