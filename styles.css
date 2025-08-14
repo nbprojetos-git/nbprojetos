@@ -364,10 +364,18 @@ section[id] {
   margin-top: 20px;
 }
 .clientes-grid img {
-  height: 80px;
+  max-height: 60px; /* reduz altura dos logos */
+  max-width: 120px; /* limita largura para logos muito horizontais */
   width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
+}
+@media (max-width: 768px) {
+  .clientes-grid img {
+    max-height: 45px; /* ainda menor no mobile */
+    max-width: 90px;
+  }
 }
 .clientes-nota {
   margin-top: 20px;
@@ -538,3 +546,4 @@ body.projetos-produto-page .projeto-card:hover .hover-bar {
   opacity: 1;
   pointer-events: auto;
 }
+
